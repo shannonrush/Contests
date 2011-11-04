@@ -8,19 +8,18 @@ function p = predict2(wordData, goodBag, badBag, dictionary)
 	totalDictionary = rows(dictionary);
 	k=1;
 	
-	for i=1:rows(wordData)
-		disp(i);
+	for i=1:numberTotal
 		M = cell2mat(wordData(i,2));
 		probMGood = 1;
 		probMBad = 1;
-		for word=1:rows(M)
-			timesInGoodBag = sum(goodBag==word);
+		for w=1:rows(M)
+			timesInGoodBag = sum(goodBag==M(w));
 			goodNum = timesInGoodBag+k;
 			goodDen = numberGood + k*totalDictionary;
 			goodElement = goodNum/goodDen;
 			probMGood = probMGood*goodElement;
 			
-			timesInBadBag = sum(badBag==word);
+			timesInBadBag = sum(badBag==M(w));
 			badNum = timesInBadBag+k;
 			badDen = numberBad + k*totalDictionary;
 			badElement = badNum/badDen;
@@ -30,9 +29,13 @@ function p = predict2(wordData, goodBag, badBag, dictionary)
 		den = probMGood * probGood + probMBad * probBad;
 		probGoodM = num/den;
 		if probGoodM >= 0.5
-			p(i)=1;
+			p(i,:)=1;
 		else
-			p(i)=0;
+			p(i,:)=0;
 		end
 	end
+	ids = cell2mat(wordData(:,1));
+	data = [ids,p];
+	csvwrite('guess2.csv',data);
+	fprintf('Train Accuracy: %f\n', mean(double(p == results)) * 100);
 end
