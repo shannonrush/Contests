@@ -1,14 +1,14 @@
 function [wordData,goodBag,badBag,dictionary]=wordData()
 	
 	% initialize
-	data = csvread('subset.csv');
+	data = csvread('training.csv');
 	m = rows(data);
 	wordData = cell(m,3);
 	goodBag = [];
 	badBag = [];
 	dictionary = [];
 	
-	fid = fopen('subset.csv');
+	fid = fopen(['training.csv']);
 	
 	for i=1:m
 		wordArray = [];
@@ -28,7 +28,7 @@ function [wordData,goodBag,badBag,dictionary]=wordData()
 		end
 		
 		% if result is good add word array to goodBag, otherwise add to badBag
-		if result==1
+		if str2num(result)==1
 			goodBag = [goodBag,wordArray];
 		else
 			badBag = [badBag,wordArray];
