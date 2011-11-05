@@ -19,8 +19,7 @@ lambda = 1;
 options = optimset('GradObj', 'on', 'MaxIter', 400);
 
 % Optimize
-[theta, J, exit_flag] = ...
-	fminunc(@(t)(cost(t, X, y, lambda)), initial_theta, options);
+[theta, J, exit_flag] = fminunc(@(t)(cost(t, X, y, lambda)), initial_theta, options);
 	
 % Compute accuracy on the training set
 p = predict(theta, X);

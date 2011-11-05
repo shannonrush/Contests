@@ -1,27 +1,27 @@
-function [wordData, goodBag, badBag, dictionary]=wordData()
+function [wordData,goodBag,badBag,dictionary]=wordData()
 	
 	% initialize
-	data = csvread('training.csv');
+	data = csvread('subset.csv');
 	m = rows(data);
 	wordData = cell(m,3);
 	goodBag = [];
 	badBag = [];
 	dictionary = [];
 	
-	fid = fopen('training.csv');
+	fid = fopen('subset.csv');
 	
 	for i=1:m
 		wordArray = [];
 		txt = fgetl(fid);
-		a = split(txt,',');
-		id = str2num(a(1,:));
-		result = str2num(a(10,:));
+		a = strsplit(txt,',');
+		id = cell2mat(a(1));
+		result = cell2mat(a(10));
 		
 		% create an array of words found in the 3 word features (name,description,caption), non-unique
-		for row=7:9
-			b = split(a(row,:),' ');
+		for r=7:9
+			feature=cell2mat(a(r));
+			b = split(num2str(feature),' ');
 			for brow=1:rows(b)
-				newRow = rows(wordArray)+1;
 				c = str2num(b(brow,:));
 				wordArray = [wordArray,c];
 			end

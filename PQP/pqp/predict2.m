@@ -1,5 +1,5 @@
 function p = predict2(wordData, goodBag, badBag, dictionary)
-	results = cell2mat(wordData(:,3));
+	results = cell2mat(wordData(:,3)')';
 	numberTotal = rows(results);
 	numberGood = sum(results==1);
 	probGood = numberGood/numberTotal;
@@ -36,6 +36,6 @@ function p = predict2(wordData, goodBag, badBag, dictionary)
 	end
 	ids = cell2mat(wordData(:,1));
 	data = [ids,p];
-	csvwrite('guess2.csv',data);
+	csvwrite('guess2_1.csv',data);
 	fprintf('Train Accuracy: %f\n', mean(double(p == results)) * 100);
 end
