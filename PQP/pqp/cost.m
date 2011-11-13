@@ -18,6 +18,5 @@ regular = lambda/m .* theta;
 regular(1) = 0; 
 
 grad = (1/m).*X' * (h-y) + regular;
-disp(grad);
 
 end
