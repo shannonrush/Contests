@@ -1,4 +1,4 @@
-function createSubmission(theta)
+function createSubmission(theta, csvTitle)
 	data = csvread('data/cs-test.csv');
 	testData = data(2:end,:);
 	ids = testData(:,1);
@@ -17,5 +17,5 @@ function createSubmission(theta)
 		p(bigs(i))=1;
 	end
 	submission = [ids,p];
-	csvwrite('submit.csv',submission);
+	csvwrite(csvTitle,submission);
 end
