@@ -27,12 +27,8 @@ testData = remainingData(qtycv+1:end,:);
 Xtest = testData(:,3:end);
 ytest = testData(:,2);
 
-% find optimal feature set
+% find optimal feature set and create submission
 
-theta = optimalFeatures(Xtrain, ytrain, Xcv, ycv, Xtest, ytest);
+optimalFeatures(Xtrain, ytrain, Xcv, ycv, Xtest, ytest);
 
 
-
-% create test submission
-
-createSubmission(theta, 'submissions/submit4.csv');

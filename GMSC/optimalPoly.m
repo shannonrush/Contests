@@ -11,7 +11,7 @@ function pdegree = optimalPoly(Xtrain,ytrain,Xcv,ycv)
 		polyTheta(i,:) = trainLinearReg([ones(rows(Xtrain), 1) Xtrain], ytrain, lambda);
 		cverror(i) = linearError(polyTheta(i,:)', Xval, yval);
 	end
-	pdegree = 1;
+	pdegree = %lowest;
 	testError = linearError(polyTheta(pdegree,:)',Xtest,ytest);
 	fprintf('test error from optimalPoly is: %f\n',testError);
 end
