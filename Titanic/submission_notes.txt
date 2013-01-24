@@ -1,0 +1,7 @@
+SUBMISSION 1
+Prediction based on gender
+Working through the python tutorial at kaggle, converting to R
+http://www.kaggle.com/c/titanic-gettingStarted/details/getting-started-with-python
+
+
+
