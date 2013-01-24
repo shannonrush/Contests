@@ -1,7 +1,19 @@
+DATA PREP
+Separating training data into 2 sets to get a sense of accuracy
+Uses caret package
+20% testing.csv
+80% training.csv
+
 SUBMISSION 1
 Prediction based on gender
 Working through the python tutorial at kaggle, converting to R
 http://www.kaggle.com/c/titanic-gettingStarted/details/getting-started-with-python
+
+SUBMISSION 2
+Random Forest
+Working through the getting started with random forests at kaggle, converting to R
+http://www.kaggle.com/c/titanic-gettingStarted/details/getting-started-with-random-forests
+
 
 
 
