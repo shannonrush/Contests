@@ -14,6 +14,10 @@ Random Forest
 Working through the getting started with random forests at kaggle, converting to R
 http://www.kaggle.com/c/titanic-gettingStarted/details/getting-started-with-random-forests
 
+SUBMISSION 3
+Logistic Regression
+Uses logistic regression model learned in Andrew Ng's Machine Learning course
+
 
 
 
