@@ -77,6 +77,8 @@ prediction <- function() {
   training$survived <- as.factor(training$survived)
   testing <- read.csv("sub2test.csv")
   testing$survived <- 0
-  rf <- randomForest(survived ~.,data=training)
-  p<-predict(rf,testing)
+  train.rf <- randomForest(survived ~.,data=training)
+  trainp<-predict(train.rf,training)
+  accuracy<-((length(which(trainp == training$survived))) / length(training$survived)) * 100
+  p<-predict(train.rf,testing)
 }

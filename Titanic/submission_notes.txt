@@ -8,22 +8,29 @@ SUBMISSION 1
 Prediction based on gender
 Working through the python tutorial at kaggle, converting to R
 http://www.kaggle.com/c/titanic-gettingStarted/details/getting-started-with-python
+kaggle 0.76555
 
 SUBMISSION 2
 Random Forest
 Working through the getting started with random forests at kaggle, converting to R
 http://www.kaggle.com/c/titanic-gettingStarted/details/getting-started-with-random-forests
+kaggle 0.77512
 
 SUBMISSION 3
 Generalized Linear Model 
 Uses glm to predict survived using same clean data from sub2
+kaggle 0.76555
 
 SUBMISSION 4
-Logistic Regression
-Uses model taught in Prof. Ng's Machine Learning
+Random Forest
+Re-cleaning data, retaining Cabin and Ticket data and predicting fills instead of using means
+accuracy on cleaned train data (all): ~94%
+kaggle 0.727272
+
 
 Ideas:
 Clean data using prediction instead of means
+Include ticket and cabin data
 Logistic regression using model taught in Machine Learning
 Neural Network
 SVM
