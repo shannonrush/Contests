@@ -1,7 +1,7 @@
 sub2 <- function() {
   library(randomForest)
-  training <<- read.csv("training.csv")
-  
+  training <<- read.csv("data/test.csv")
+
   #remove name, ticket and cabin
   training$name <<- NULL
   training$ticket <<- NULL
@@ -11,8 +11,9 @@ sub2 <- function() {
   training$sex <<- as.numeric(training$sex)
   training$embarked <<- as.numeric(training$embarked)
   
-  #remove rows where survived is NA
-  training <<- training[!is.na(training$survived),]
+  #remove rows where survived is NA and set to factor
+  #training <<- training[!is.na(training$survived),]
+  #training$survived <<- as.factor(training$survived)
   
   # replace NA sex with random 1 or 2
   training$sex[is.na(training$sex)]<<- sample(c(1,2),1)
@@ -30,7 +31,9 @@ sub2 <- function() {
   training$fare <<- apply(training,1,function(x) {replaceZeroFareByClass(x)})
   
   # fill in NA for pclass based on fare
-  training$pclass <<- apply(training,1,function(x) {replaceNAPClassByFare(x)})  
+  training$pclass <<- apply(training,1,function(x) {replaceNAPClassByFare(x)})
+  
+  return (training)
 }
 
 replaceZeroFareByClass <- function(passenger) {
@@ -65,4 +68,15 @@ replaceNAPClassByFare <- function(passenger) {
       return (1)
     }
   }
+}
+
+prediction <- function() {
+  library(randomForest)
+  library(plyr)
+  training <- read.csv("sub2train.csv")
+  training$survived <- as.factor(training$survived)
+  testing <- read.csv("sub2test.csv")
+  testing$survived <- 0
+  rf <- randomForest(survived ~.,data=training)
+  p<-predict(rf,testing)
 }
