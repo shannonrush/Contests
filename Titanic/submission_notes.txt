@@ -27,6 +27,12 @@ Re-cleaning data, retaining Cabin and Ticket data and predicting fills instead o
 accuracy on cleaned train data (all): ~94%
 kaggle 0.727272
 
+SUBMISSION 5
+Logistic regression
+Porting Octave code from Machine Learning class to R
+Going to try with the clean data from sub4
+accuracy on sub4 train data(all):
+
 
 Ideas:
 Clean data using prediction instead of means
