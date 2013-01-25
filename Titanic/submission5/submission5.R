@@ -3,25 +3,27 @@ sub5 <- function() {
   train$name <- NULL
   train$ticket <- NULL
   train$cabin <- as.numeric(train$cabin)
-  train_m <- data.matrix(train)
-  X <- train_m[,c(2:10)]
-  y <- train_m[,1]
+  x <- cbind(int=rep(1, nrow(train)), train[,c(2:10)])
+  x <- as.matrix(x)
+  y <- train[,1]
+ 
+  source("logisticRegression.R")
+  theta <- rep(0, ncol(x))
+  j <- rep(0,10)
+  for (i in 1:10) {
+    theta <- theta - solve(Hessian(theta,x)) %*% grad(theta,x,y)
+    j[i] <- J(theta,x,y)
+  }
   
-  m<-nrow(X)
-  n<-ncol(X)
+  p<-prediction(theta,x)
+  accuracy<-(length(which(p == y)) / length(y)) * 100
   
-  intercept = numeric(m)
-  intercept[1:length(intercept)]<-1
-  cbind(intercept,X)
-  
-  # Initialize fitting parameters
-  initial_theta <- numeric(n+1)
-  
-  # Compute and display initial cost and gradient
-  #[cost, grad] = costFunction(initial_theta, X, y);
-  source("costFunction.R")
-  r <- costFunction(initial_theta, X, y)
-  cost <- r$cost
-  grad <- r$grad
-  
+  test<-read.csv("test4_clean.csv")
+  test$name<-NULL
+  test$ticket<-NULL
+  test$cabin<-as.numeric(test$cabin)
+  testx <- cbind(int=rep(1, nrow(test)), test)
+  test <-as.matrix(test)
+  testp<-prediction(theta,testx)
+  write.table(testp,"sub5.csv",row.names=F,col.names=F,quote=F)
 }

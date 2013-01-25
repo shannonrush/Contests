@@ -31,7 +31,8 @@ SUBMISSION 5
 Logistic regression
 Porting Octave code from Machine Learning class to R
 Going to try with the clean data from sub4
-accuracy on sub4 train data(all):
+This isn't going to do well but I'll submit it anyway, just to see
+accuracy on sub4 train data(all):81.25
 
 
 Ideas:
