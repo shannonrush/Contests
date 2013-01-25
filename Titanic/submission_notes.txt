@@ -15,8 +15,19 @@ Working through the getting started with random forests at kaggle, converting to
 http://www.kaggle.com/c/titanic-gettingStarted/details/getting-started-with-random-forests
 
 SUBMISSION 3
+Generalized Linear Model 
+Uses glm to predict survived using same clean data from sub2
+
+SUBMISSION 4
 Logistic Regression
-Uses logistic regression model learned in Andrew Ng's Machine Learning course
+Uses model taught in Prof. Ng's Machine Learning
+
+Ideas:
+Clean data using prediction instead of means
+Logistic regression using model taught in Machine Learning
+Neural Network
+SVM
+
 
 
 
