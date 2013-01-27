@@ -24,7 +24,5 @@ survivalVsFare <- function () {
                              nrow(lived[lived$fare_bin==2,]),
                              nrow(lived[lived$fare_bin==3,]),
                              nrow(lived[lived$fare_bin==4,])))
-  ggplot(data=df1, 
-         aes(x=bins, y=counts, fill=survived)) + labs(y="Survival Count", x="Fare") + scale_x_discrete(labels=c("<= $10.50","$10.51 - $20","$20.01 - $40","> $40")) + geom_bar(stat="identity", 
-         position=position_dodge(),colour="black")
+  ggplot(data=df1, aes(x=bins, y=counts, fill=survived)) + labs(title="Survival By Fare Category", y="Survival Count", x="Fare") + scale_x_discrete(labels=c("<= $10.50","$10.51 - $20","$20.01 - $40","> $40")) + geom_bar(stat="identity", position=position_dodge(),colour="black")+scale_fill_manual(values=c("#999999", "pink"),name="",labels=c("Perished","Survived"))+theme(plot.title=element_text(size=15, vjust=1))
 }
