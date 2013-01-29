@@ -1,1 +1,3 @@
 SUBMISSION 1
+Using data provided on January 26, 2013, split into train/validate by splitData.R
+randomForest

@@ -1,3 +1,8 @@
-Sale Price Vs Manufacture Year:
-Scatterplot with x axis as manufacture year and y axis as sale price
+Sale Price Histogram
+Sale Price By Year Made
+
+Ideas:
+
+Mean by month
+Mean by season
 
