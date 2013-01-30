@@ -1,8 +1,14 @@
 Sale Price Histogram
-Sale Price By Year Made
+ - Number of bulldozers sold decreases as sale price increases
+
+salePriceByYearMadeMean
+- Sale price tends to be higher for newer bulldozers
+
+salePriceByMonthSoldMean
+- Higher in Jan/Feb but nothing else immediately noticable
 
 Ideas:
 
-Mean by month
+X Mean by month
 Mean by season
 
