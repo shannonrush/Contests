@@ -7,6 +7,12 @@ salePriceByYearMadeMean
 salePriceByMonthSoldMean
 - Higher in Jan/Feb but nothing else immediately noticable
 
+salePriceBySeasonalMean 
+- Winter mean is higher by ~1500 than other three months which are comparable
+
+manufacturerMeanSalesPriceByQty
+- A few notable manufacturers
+
 Ideas:
 
 X Mean by month
