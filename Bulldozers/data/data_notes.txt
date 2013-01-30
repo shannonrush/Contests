@@ -1,0 +1,6 @@
+* Machine Appendix include a new field MfgYear that should take the place of YearMade, probably remove YearMade during cleaning
+
+Variables to Probably Add:
+
+Month Sold
+Season Sold

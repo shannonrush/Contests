@@ -1,0 +1,5 @@
+Does the number of times a bulldozer has been sold affect its sale price?
+- if so consider new variable timesSold
+Do different auction houses demand a higher sales price for comparable bulldozers?
+What physical features affect sales price the most?
+Does the data inform us of the condition of the bulldozer?

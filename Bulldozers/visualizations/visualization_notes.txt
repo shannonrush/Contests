@@ -13,6 +13,9 @@ salePriceBySeasonalMean
 manufacturerMeanSalesPriceByQty
 - A few notable manufacturers
 
+multipleSales
+- In 26240 obs 288 machines were resold, in 77 (27%) of these resales the sale price decreased, 173 (60%) increased and 38 (13%) stayed the same
+
 Ideas:
 
 X Mean by month
