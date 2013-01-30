@@ -1,5 +1,10 @@
 Does the number of times a bulldozer has been sold affect its sale price?
 - if so consider new variable timesSold
+-> In 26240 obs 288 machines were resold, in 77 (27%) of these resales the sale price decreased, 173 (60%) increased and 38 (13%) stayed the same
+
 Do different auction houses demand a higher sales price for comparable bulldozers?
+- Numbers of sales reported vary
+- 
+
 What physical features affect sales price the most?
 Does the data inform us of the condition of the bulldozer?

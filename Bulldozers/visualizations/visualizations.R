@@ -100,19 +100,14 @@ multipleSales <- function() {
   length(diffSales[diffSales==0])
 }
 
-multSalesAllTraining <- function() {
-  explore <- read.csv("../data/processed/training.csv")
-  mids<-explore$MachineID
-  machinesWithMultSales <- unique(mids[which(duplicated(mids))])
-  firstSales <- sapply(machinesWithMultSales,function(x)explore[explore$MachineID==x,][1,"SalePrice"])
-  secondSales <- sapply(machinesWithMultSales,function(x)explore[explore$MachineID==x,][2,"SalePrice"])
-  diffSales <- sapply(1:length(firstSales),function(x)firstSales[x]-secondSales[x])
-  # positive numbers mean sale price decreased (8000-7000=1000)
-  # negative numbers mean sale price increased (7000-8000=-1000)
-  plot(diffSales, col = ifelse(diffSales>=0,ifelse(diffSales==0,'black','red'),'green'),pch=20,xaxt="n",xlab="",ylab="Difference in Sale Price ($)",main="Difference Between First and Second Sales Price")
-  numDecreased<-length(diffSales[diffSales>0])
-  numIncreased<-length(diffSales[diffSales<0])
-  numSame<-length(diffSales[diffSales==0])
+salePriceByAuctionHouseMean <- function() {
+  explore <- read.csv("explore.csv")
+  datasources <- unique(explore$datasource)
+  datasourceMeans <- sapply(datasources,function(x)mean(explore[explore$datasource==x,"SalePrice"]))
+  datasourceQtys <- sapply(datasources,function(x)nrow(explore[explore$datasource==x,]))
+  plot(datasourceQtys,datasourceMeans,main="Sales At Auction Houses",xlab="Number Bulldozers Sold",ylab="Mean Sales Price ($) At Auction House")
+  library("calibrate")
+  textxy(datasourceQtys,datasourceMeans,datasources)
 }
 
 
