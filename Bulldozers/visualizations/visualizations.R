@@ -110,4 +110,15 @@ salePriceByAuctionHouseMean <- function() {
   textxy(datasourceQtys,datasourceMeans,datasources)
 }
 
+salePriceByAuctioneerMean <- function() {
+  # auctioneer is the seller, not the actual auctioneer who conducts the auction
+  explore <- read.csv("explore.csv")
+  auctioneers <- levels(factor(explore$auctioneerID))
+  aucMeans <- sapply(auctioneers,function(x)mean(explore[explore$auctioneerID==x,"SalePrice"],na.rm=T))
+  aucQtys <- sapply(auctioneers,function(x)nrow(explore[explore$auctioneer==x,]))
+  plot(aucQtys,aucMeans,main="Sales By Auctioneer (Seller)",xlab="Number Bulldozers Sold",ylab="Mean Sales Price")
+  library("calibrate")
+  textxy(aucQtys,aucMeans,auctioneers)
+}
+
 

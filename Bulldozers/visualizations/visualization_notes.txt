@@ -16,8 +16,11 @@ manufacturerMeanSalesPriceByQty
 multipleSales
 - In 26240 obs 288 machines were resold, in 77 (27%) of these resales the sale price decreased, 173 (60%) increased and 38 (13%) stayed the same
 
+saleByAuctioneer
+- Number of bulldozers sold by each auctioneer is comparable (~2000), but mean sales price has a wide range. Auctioneer (seller) is surprisingly predictive - why would this be? Reps from companies talking up buyers before the auction? Or sellers have differing reputations on providing quality machines, accurate descriptions of conditions, etc.? 
+
 Ideas:
 
 X Mean by month
-Mean by season
+X Mean by season
 
