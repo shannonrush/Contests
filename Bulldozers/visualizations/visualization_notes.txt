@@ -19,6 +19,9 @@ multipleSales
 saleByAuctioneer
 - Number of bulldozers sold by each auctioneer is comparable (~2000), but mean sales price has a wide range. Auctioneer (seller) is surprisingly predictive - why would this be? Reps from companies talking up buyers before the auction? Or sellers have differing reputations on providing quality machines, accurate descriptions of conditions, etc.? 
 
+saleByState
+- Nothing super exciting here
+
 Ideas:
 
 X Mean by month

@@ -1,3 +1,4 @@
 SUBMISSION 1
-Using data provided on January 26, 2013, split into train/validate by splitData.R
+Using data updated with machine appendix, split randomly by splitDataRandom 
+No work on data other than machine appendix merge and removing/fixing factors with too many levels
 randomForest

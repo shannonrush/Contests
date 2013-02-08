@@ -1,5 +1,7 @@
 sub1 <- function() {
-  library("randomForest")
-  training <- read.csv("../data/training.csv")
-  training.rf <- randomForest(SalePrice ~.,data=training, importance=T,na.action=na.omit)
+  library("party")
+  t <- read.csv("../data/processed/training.csv")
+  fit <- rpart(SalePrice ~MfgYear+fiManufacturerID+MachineHoursCurrentMeter,data=t,method="anova")
+  p<-predict(fit,t)
+
 }

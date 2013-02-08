@@ -1,0 +1,19 @@
+Training.csv - 70% of training data
+validating.csv - 30% of training data
+valid.csv - test data
+
+TESTING
+
+data = training_Clean.csv
+
+sp.rf <- randomForest(SalePrice ~ ., data=data, mtry=3,importance=TRUE, na.action=na.omit)
+predict on training_Clean: 0.3818256
+predict on validating_Clean: 0.4584817
+
+sp2.rf <- randomForest(SalePrice ~ MachineID+ModelID+MfgYear+fiManufacturerID+PrimaryLower+PrimaryUpper+SalesID+datasource+auctioneerID+MachineHoursCurrentMeter+UsageBand+ProductSize+Enclosure+Blade_Type+monthSold+seasonSold,data=train, mtry=3,importance=TRUE, na.action=na.omit)
+predict on training_clean:
+predict on validating_clean:
+
+sp3a on validating_clean: 0.2808475
+
+SUBMISSION 1

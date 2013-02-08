@@ -121,4 +121,14 @@ salePriceByAuctioneerMean <- function() {
   textxy(aucQtys,aucMeans,auctioneers)
 }
 
+salePriceByStateMean <- function() {
+  explore <- read.csv("explore.csv")
+  states <- levels(factor(explore$state))
+  stateMeans <- sapply(states,function(x)mean(explore[explore$state==x,"SalePrice"],na.rm=T))
+  stateQtys <- sapply(states,function(x)nrow(explore[explore$state==x,]))
+  plot(stateQtys,stateMeans,main="Sales By State",xlab="Number Bulldozers Sold",ylab="Mean Sales Price")
+  library("calibrate")
+  textxy(stateQtys,stateMeans,states)
+}
+
 
