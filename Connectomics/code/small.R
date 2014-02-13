@@ -11,4 +11,15 @@
 # of the neurons (arranged on a flat surface). The data, which are simulated, reproduce as faithfully 
 # as possible neural activity measured with calcium fluorescence imaging of neural cultures.
 #
-flor1.frame <- read.csv('fluorescence_iNet1_Size100_CC01inh.txt',header=F)
+
+F1.frame <- read.csv('../data/small/fluorescence_iNet1_Size100_CC01inh.txt',header=F)
+# [1] 179498    100
+# 179498 neural activity readings over 20ms intervals for 100 neurons
+P1.frame <- read.csv('../data/small/networkPositions_iNet1_Size100_CC01inh.txt',header=F)
+# [1] 100   2
+# X and Y positions for each neuron
+N1.frame <- read.csv('../data/small/network_iNet1_Size100_CC01inh.txt',header=F)
+# [1] 1249    3
+# Neuron I, Neuron J and their connection weight
+# self connections allowed
+# connection of -1 indicates chemical blockage, effectively absent
