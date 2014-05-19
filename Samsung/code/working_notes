@@ -1,0 +1,20 @@
+Exploratory
+
+Find optimum models on current data set
+
+RF: 95.35%
+MLR: 96.09%
+
+SVM
+
+
+
+
+
+
+To Try:
+blend
+SVM
+NN
+
+PCA/SVD

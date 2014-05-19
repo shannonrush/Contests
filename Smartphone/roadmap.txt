@@ -1,0 +1,22 @@
+Individual Classifiers:
+
+MLR X
+SVM X
+RF X
+
+Ensembles:
+
+My own blender
+http://www.d.umn.edu/~rmaclin/publications/opitz-jair99.pdf
+Bagging X
+Boosting 
+> Arcing
+> Ada-Boosting
+> SAMME
+
+< Make package
+
+possible submissions:
+
+
+thoughts:

@@ -12,3 +12,15 @@ writePrediction <- function(salesids,predictions,filename) {
 showMissing <- function(data) {
   print(apply(data,2,function(x)sum(is.na(x))))
 }
+
+showNaN <- function(data) {
+  print(apply(data,2,function(x)sum(is.nan(x))))
+}
+
+showInf <- function(data) {
+  print(apply(data,2,function(x)sum(is.infinite(x))))
+}
+
+showBlank <- function(data) {
+  print(apply(data,2,function(x)sum(x=="")))
+}

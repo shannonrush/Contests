@@ -1,0 +1,19 @@
+Individual Classifiers:
+
+MLR X
+SVM X
+RF X
+k-means clustering
+other clustering?
+
+Ensembles:
+
+My own blender
+http://www.d.umn.edu/~rmaclin/publications/opitz-jair99.pdf
+Boosting
+
+possible submissions:
+RF with ntree 750 and mtry 92
+
+thoughts:
+maybe subject should be removed?

@@ -1,0 +1,6 @@
+*.csv
+*.tgz
+*.zip
+*.Rhistory
+*.Rdata
+*.Rda

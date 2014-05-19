@@ -1,0 +1,74 @@
+submission 1
+
+Bare bones svm
+validation: 98.2%
+kaggle (training only): 0.89948
+
+submission 2:
+
+MLR with feature selection
+validation: 97.54%
+kaggle: 0.876
+
+submission 3:
+RF with ntree 750
+validation: 98.44%
+kaggle: 0.93565
+
+## changed to training/validating split by subject 
+
+submission 4:
+MLR with feature selection using full training set
+validation (by subject): 97.54%
+kaggle: 0.89713
+
+submission 5:
+My blend of RF(ntree=750,mtry=92),SVM,MLR with feature selection using full train set
+validation: 96.58%
+kaggle: 0.90136
+
+submission 6:
+RF with ntree 750 and mtry 92
+validation: 94.97%
+kaggle:0.92767
+
+submission 7:
+Bagging 5 RFs
+validation: 94.46%
+kaggle:0.93189
+
+submission 8:
+Bagging with replacement 7 RFs ntree 500
+kaggle: 0.92673
+
+submission 9:
+Bagging with replacement  3 MLRs 
+kaggle: 0.89901
+
+submission 10:
+corrected bagging, 11 RFs
+kaggle: 0.93001
+
+submission 11:
+boosting, no epsilon 15 RFs
+kaggle: 0.93612 
+
+submission 12:
+boosting, 27 RF
+kaggle: 0.93706 
+
+submission 13:
+SAMME 7
+kaggle: 0.93471
+
+submission 14:
+SAMME 37
+kaggle: 0.93706
+
+submission 15:
+SAMME 100
+kaggle: 0.93706
+
+submission 16:
+SAMME 59
+kaggle: 0.93753 * 
