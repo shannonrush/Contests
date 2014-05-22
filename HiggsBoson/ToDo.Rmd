@@ -1,0 +1,6 @@
+ToDo
+========================================
+[X] Read tech docs
+[X] Preprocess Data
+    [X] Remove Weight from train
+[] Exploratory Figures
