@@ -529,13 +529,34 @@ rf <- randomForest(Label ~ ., data = train, importance = T, do.trace = T)
 
 
 ```r
-pred <- predict(rf, test[1:10, ], proximity = T)
+pred <- predict(rf, test, type = "prob")
+```
+
+
+```r
+
+## add EventId to pred
+pred.df <- data.frame(EventId = test$EventId, b = pred[, "b"], s = pred[, "s"])
+
+# order pred.df by decreasing s to get the RankOrder
+require(plyr)
 ```
 
 ```
-## Error: no applicable method for 'predict' applied to an object of class
-## "c('randomForest.formula', 'randomForest')"
+## Loading required package: plyr
 ```
+
+```r
+ordered.pred <- arrange(pred.df, desc(s))
+
+Class <- apply(ordered.pred, 1, function(p) ifelse(p["s"] > p["b"], "s", "b"))
+
+final.prediction <- data.frame(EventId = ordered.pred$EventId, RankOrder = 1:550000, 
+    Class)
+
+write.csv(final.prediction, file = "submission2.csv", row.names = F, quote = F)
+```
+
 
 
 

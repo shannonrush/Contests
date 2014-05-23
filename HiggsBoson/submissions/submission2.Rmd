@@ -10,8 +10,24 @@ Submission 2 - Single Random Forest with Defaults
     require(randomForest)
     rf <- randomForest(Label ~ ., data=train, importance=T, do.trace=T) 
 ```
-```{r prediction}
-    pred <- predict(rf, test[1:10,])
+```{r prediction, cache=TRUE}
+    pred <- predict(rf, test, type="prob")
 ```
+```{r create_submission}
+
+    ## add EventId to pred
+     pred.df <- data.frame(EventId=test$EventId, b=pred[,"b"], s=pred[,"s"])  
+
+    # order pred.df by decreasing s to get the RankOrder
+    require(plyr)    
+    ordered.pred <- arrange(pred.df, desc(s))
+    
+    Class <- apply(ordered.pred, 1, function(p) ifelse(p["s"] > p["b"], "s", "b"))
+
+    final.prediction <- data.frame(EventId=ordered.pred$EventId,RankOrder=1:550000,Class)
+    
+    write.csv(final.prediction, file="submission2.csv", row.names=F, quote=F)
+```
+
 
 

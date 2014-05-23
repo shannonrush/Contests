@@ -701,11 +701,28 @@ test &lt;- read.csv(&quot;../data/original/test.csv&quot;)
 ##   500:  16.07%  9.58% 28.53%
 </code></pre>
 
-<pre><code class="r">pred &lt;- predict(rf, test[1:10, ], proximity = T)
+<pre><code class="r">pred &lt;- predict(rf, test, type = &quot;prob&quot;)
 </code></pre>
 
-<pre><code>## Error: no applicable method for &#39;predict&#39; applied to an object of class
-## &quot;c(&#39;randomForest.formula&#39;, &#39;randomForest&#39;)&quot;
+<pre><code class="r">
+## add EventId to pred
+pred.df &lt;- data.frame(EventId = test$EventId, b = pred[, &quot;b&quot;], s = pred[, &quot;s&quot;])
+
+# order pred.df by decreasing s to get the RankOrder
+require(plyr)
+</code></pre>
+
+<pre><code>## Loading required package: plyr
+</code></pre>
+
+<pre><code class="r">ordered.pred &lt;- arrange(pred.df, desc(s))
+
+Class &lt;- apply(ordered.pred, 1, function(p) ifelse(p[&quot;s&quot;] &gt; p[&quot;b&quot;], &quot;s&quot;, &quot;b&quot;))
+
+final.prediction &lt;- data.frame(EventId = ordered.pred$EventId, RankOrder = 1:550000, 
+    Class)
+
+write.csv(final.prediction, file = &quot;submission2.csv&quot;, row.names = F, quote = F)
 </code></pre>
 
 </body>
