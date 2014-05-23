@@ -3,4 +3,6 @@ ToDo
 [X] Read tech docs
 [X] Preprocess Data
     [X] Remove Weight from train
-[] Exploratory Figures
+[X] Exploratory Figures
+[] Exploratory Random Forest (submission 2)
+[] Figure out weights for submission

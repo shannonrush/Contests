@@ -1,0 +1,17 @@
+Submission 2 - Single Random Forest with Defaults
+========================================================
+```{r load_data, cache=TRUE}
+    train <- read.csv("../data/processed/processed_train.csv")
+    # remove EventId, not allowed for classifying
+    train$EventId <- NULL
+    test <- read.csv("../data/original/test.csv")
+```
+```{r random_forest, cache=TRUE}
+    require(randomForest)
+    rf <- randomForest(Label ~ ., data=train, importance=T, do.trace=T) 
+```
+```{r prediction}
+    pred <- predict(rf, test[1:10,])
+```
+
+
