@@ -10,7 +10,8 @@ ToDo
 [X] Tune single random forest for submission 3
 [] Further exploration of variables based on random forest from submission 2
 [X] More sophisticated feature selection for submission 4
-[] RF with bagging for submission 5
+[X] RF with bagging for submission 5
+[] RF with boosting for submission 6
 
 Nearing end:
 [] Upload Model https://www.kaggle.com/forums/t/3821/model-submission-best-practices
