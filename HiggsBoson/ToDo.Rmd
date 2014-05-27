@@ -4,5 +4,13 @@ ToDo
 [X] Preprocess Data
     [X] Remove Weight from train
 [X] Exploratory Figures
-[] Exploratory Random Forest (submission 2)
-[] Figure out weights for submission
+[X] Exploratory Random Forest (submission 2)
+[X] Figure out RankOrder for submission
+[X] Reverse RankOrder per new clarification
+[X] Tune single random forest for submission 3
+[] Further exploration of variables based on random forest from submission 2
+[X] More sophisticated feature selection for submission 4
+[] RF with bagging for submission 5
+
+Nearing end:
+[] Upload Model https://www.kaggle.com/forums/t/3821/model-submission-best-practices

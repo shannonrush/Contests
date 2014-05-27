@@ -5,3 +5,5 @@
 *.Rhistory
 *.Rdata
 *.Rda
+*.rdb
+*.rdx
