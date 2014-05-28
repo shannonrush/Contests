@@ -20,6 +20,7 @@ of the training set and saved a new CSV as processed_train.csv
 ```{r load_data, cache=TRUE}
     train <- read.csv("data/processed/processed_train.csv")
     names(train)
+    signal <- which(train$Label=="s")
 ```
 ```{r load_libraries}
     require(ggplot2)
@@ -78,6 +79,110 @@ observation outside of this range is background?
     length(which(outside.range=="b"))/nrow(outside.range)
 ```
 About 74% of observations outside the range -1.5 to 1.5 are background noise.
+
+**PRI_tau_phi**
+
+The azimuthal angle φ, from -pi to pi in the spherical coordinate system, of the hadronic tau 
+around the beam axis.
+
+```{r pri_tau_phi_fig, fig.width=8, cache=TRUE}
+    create_plot(train, "PRI_tau_phi")
+```
+```{r pri_tau_phi}
+    # all observations
+    summary(train$PRI_tau_phi)
+    # just the signal
+    summary(train[signal,"PRI_tau_phi"])
+    # just the background
+    summary(train[-signal,"PRI_tau_phi"])
+```
+**PRI_lep_pt**
+
+The transverse momentum $\sqrt{p^2_x+p^2_y}$, or the momentum perpendicular to the beam line, of the lepton (electron or muon) measured in GeV
+
+```{r pri_lep_pt_fig, fig.width=8, cache=TRUE}
+    create_plot(train, "PRI_lep_pt")
+```
+Replotting to < 200
+```{r pri_lep_pt_200, fig.width=8, cache=TRUE}
+    plp.200 <- subset(train, PRI_lep_pt < 200)
+    create_plot(plp.200, "PRI_lep_pt")
+```
+```{r pri_lep_pt}
+    summary(train$PRI_lep_pt)
+```
+**PRI_lep_eta**
+
+The pseudorapidity η (the angle from the beam axis) of the lepton.
+
+```{r pri_lep_eta_fig, fig.width=8, cache=TRUE}
+    create_plot(train, "PRI_lep_eta")
+```
+Just as with the pseudorapidity of the hadronic tau it appears the signal
+clusters in the range of -1.5 to 1.5
+```{r pri_lep_eta_in_range}
+    signal.obs <- subset(train, Label == "s", select = PRI_lep_eta)
+    # quantity signal in range -1.5 to 1.5
+    in.range <- subset(signal.obs, PRI_lep_eta >= -1.5 & PRI_lep_eta <= 1.5)
+    nrow(in.range)/nrow(signal.obs)
+```
+Aabout 78% of signal observations fall in the -1.5 to 1.5 range. 
+
+```{r pri_lep_eta_out_range}
+    outside.range <- subset(train, PRI_lep_eta < -1.5 | PRI_lep_eta > 1.5, select=Label)
+    table(outside.range)
+    length(which(outside.range=="b"))/nrow(outside.range)
+```
+About 75% of observations outside the range -1.5 to 1.5 are background noise.
+
+**PRI_lep_phi**
+
+The azimuthal angle φ, from -pi to pi in the spherical coordinate system, of the lepton 
+around the beam axis.
+
+```{r pri_lep_phi_fig, fig.width=8, cache=TRUE}
+    create_plot(train, "PRI_lep_phi")
+```
+```{r pri_lep_phi}
+        # all observations
+    summary(train$PRI_lep_phi)
+    # just the signal
+    summary(train[signal,"PRI_lep_phi"])
+    # just the background
+    summary(train[-signal,"PRI_lep_phi"])
+```
+**PRI_met**
+The missing transverse energy $\overrightarrow{E}^{miss}_T$ 
+
+```{r pri_met, fig.width=8, cache=TRUE}
+    create_plot(train, "PRI_met")
+```
+```{r pri_met_summary}
+    summary(train$PRI_met)
+    # just the signal
+    summary(train[signal,"PRI_met"])
+    # just the background
+    summary(train[-signal,"PRI_met"])
+```
+That one outlier really makes this blurry...
+```{r pri_met_500, fig.width=8, cache=TRUE}
+    pm.500 <- subset(train, PRI_met < 500)
+    create_plot(pm.500, "PRI_met")
+```
+```{r pri_met_200, fig.width=8, cache=TRUE}
+    pm.200 <- subset(train, PRI_met < 200)
+    create_plot(pm.200, "PRI_met")
+```
+```{r pri_met_100, fig.width=8, cache=TRUE}
+    pm.100 <- subset(train, PRI_met < 100)
+    create_plot(pm.100, "PRI_met")
+```
+There appears to be a lot of signal clustered < 25
+```{r pri_met_signal_25}
+    under.25 <- subset(train[signal,], PRI_met < 25)
+    nrow(under.25)/length(signal)
+```
+About 38% of the signal is < 25 
 
 
 

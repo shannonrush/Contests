@@ -42,6 +42,10 @@ names(train)
 ## [31] "PRI_jet_all_pt"              "Label"
 ```
 
+```r
+signal <- which(train$Label == "s")
+```
+
 
 ```r
 require(ggplot2)
@@ -151,6 +155,249 @@ length(which(outside.range == "b"))/nrow(outside.range)
 ```
 
 About 74% of observations outside the range -1.5 to 1.5 are background noise.
+
+**PRI_tau_phi**
+
+The azimuthal angle φ, from -pi to pi in the spherical coordinate system, of the hadronic tau 
+around the beam axis.
+
+
+```r
+create_plot(train, "PRI_tau_phi")
+```
+
+![plot of chunk pri_tau_phi_fig](figure/pri_tau_phi_fig.png) 
+
+
+```r
+# all observations
+summary(train$PRI_tau_phi)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -3.1400 -1.5800 -0.0330 -0.0082  1.5600  3.1400
+```
+
+```r
+# just the signal
+summary(train[signal, "PRI_tau_phi"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -3.1400 -1.5800 -0.0590 -0.0192  1.5400  3.1400
+```
+
+```r
+# just the background
+summary(train[-signal, "PRI_tau_phi"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -3.1400 -1.5700 -0.0170 -0.0024  1.5800  3.1400
+```
+
+**PRI_lep_pt**
+
+The transverse momentum $\sqrt{p^2_x+p^2_y}$, or the momentum perpendicular to the beam line, of the lepton (electron or muon) measured in GeV
+
+
+```r
+create_plot(train, "PRI_lep_pt")
+```
+
+![plot of chunk pri_lep_pt_fig](figure/pri_lep_pt_fig.png) 
+
+Replotting to < 200
+
+```r
+plp.200 <- subset(train, PRI_lep_pt < 200)
+create_plot(plp.200, "PRI_lep_pt")
+```
+
+![plot of chunk pri_lep_pt_200](figure/pri_lep_pt_200.png) 
+
+
+```r
+summary(train$PRI_lep_pt)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    26.0    32.4    40.5    46.7    53.4   560.0
+```
+
+**PRI_lep_eta**
+
+The pseudorapidity η (the angle from the beam axis) of the lepton.
+
+
+```r
+create_plot(train, "PRI_lep_eta")
+```
+
+![plot of chunk pri_lep_eta_fig](figure/pri_lep_eta_fig.png) 
+
+Just as with the pseudorapidity of the hadronic tau it appears the signal
+clusters in the range of -1.5 to 1.5
+
+```r
+signal.obs <- subset(train, Label == "s", select = PRI_lep_eta)
+# quantity signal in range -1.5 to 1.5
+in.range <- subset(signal.obs, PRI_lep_eta >= -1.5 & PRI_lep_eta <= 1.5)
+nrow(in.range)/nrow(signal.obs)
+```
+
+```
+## [1] 0.7837
+```
+
+Aabout 78% of signal observations fall in the -1.5 to 1.5 range. 
+
+
+```r
+outside.range <- subset(train, PRI_lep_eta < -1.5 | PRI_lep_eta > 1.5, select = Label)
+table(outside.range)
+```
+
+```
+## outside.range
+##     b     s 
+## 56096 18534
+```
+
+```r
+length(which(outside.range == "b"))/nrow(outside.range)
+```
+
+```
+## [1] 0.7517
+```
+
+About 75% of observations outside the range -1.5 to 1.5 are background noise.
+
+**PRI_lep_phi**
+
+The azimuthal angle φ, from -pi to pi in the spherical coordinate system, of the lepton 
+around the beam axis.
+
+
+```r
+create_plot(train, "PRI_lep_phi")
+```
+
+![plot of chunk pri_lep_phi_fig](figure/pri_lep_phi_fig.png) 
+
+
+```r
+# all observations
+summary(train$PRI_lep_phi)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -3.1400 -1.5200  0.0860  0.0435  1.6200  3.1400
+```
+
+```r
+# just the signal
+summary(train[signal, "PRI_lep_phi"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -3.1400 -1.5000  0.1030  0.0539  1.6300  3.1400
+```
+
+```r
+# just the background
+summary(train[-signal, "PRI_lep_phi"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -3.1400 -1.5300  0.0760  0.0381  1.6100  3.1400
+```
+
+**PRI_met**
+The missing transverse energy $\overrightarrow{E}^{miss}_T$ 
+
+
+```r
+create_plot(train, "PRI_met")
+```
+
+![plot of chunk pri_met](figure/pri_met.png) 
+
+
+```r
+summary(train$PRI_met)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     0.1    21.4    34.8    41.7    51.9  2840.0
+```
+
+```r
+# just the signal
+summary(train[signal, "PRI_met"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     0.2    17.9    31.9    42.7    54.5  2840.0
+```
+
+```r
+# just the background
+summary(train[-signal, "PRI_met"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     0.1    23.3    35.9    41.2    51.0   951.0
+```
+
+That one outlier really makes this blurry...
+
+```r
+pm.500 <- subset(train, PRI_met < 500)
+create_plot(pm.500, "PRI_met")
+```
+
+![plot of chunk pri_met_500](figure/pri_met_500.png) 
+
+
+```r
+pm.200 <- subset(train, PRI_met < 200)
+create_plot(pm.200, "PRI_met")
+```
+
+![plot of chunk pri_met_200](figure/pri_met_200.png) 
+
+
+```r
+pm.100 <- subset(train, PRI_met < 100)
+create_plot(pm.100, "PRI_met")
+```
+
+![plot of chunk pri_met_100](figure/pri_met_100.png) 
+
+There appears to be a lot of signal clustered < 25
+
+```r
+under.25 <- subset(train[signal, ], PRI_met < 25)
+nrow(under.25)/length(signal)
+```
+
+```
+## [1] 0.3842
+```
+
+About 38% of the signal is < 25 
 
 
 
