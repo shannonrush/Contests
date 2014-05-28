@@ -106,8 +106,51 @@ create_plot(ptp.50, "PRI_tau_pt")
 
 **PRI_tau_eta**
 
-The pseudorapidity η of the hadronic tau.
+The pseudorapidity η (the angle from the beam axis) of the hadronic tau.
 
+
+```r
+create_plot(train, "PRI_tau_eta")
+```
+
+![plot of chunk pri_tau_eta_fig](figure/pri_tau_eta_fig.png) 
+
+It looks like a higher quantity of signal observations exist within -1.5 to 1.5 than outside this range.
+
+```r
+signal.obs <- subset(train, Label == "s", select = PRI_tau_eta)
+# quantity signal in range -1.5 to 1.5
+in.range <- subset(signal.obs, PRI_tau_eta >= -1.5 & PRI_tau_eta <= 1.5)
+nrow(in.range)/nrow(signal.obs)
+```
+
+```
+## [1] 0.7974
+```
+
+Almost 80% of signal observations fall in the -1.5 to 1.5 range. Is it also more likely that an
+observation outside of this range is background?
+
+```r
+outside.range <- subset(train, PRI_tau_eta < -1.5 | PRI_tau_eta > 1.5, select = Label)
+table(outside.range)
+```
+
+```
+## outside.range
+##     b     s 
+## 49179 17355
+```
+
+```r
+length(which(outside.range == "b"))/nrow(outside.range)
+```
+
+```
+## [1] 0.7392
+```
+
+About 74% of observations outside the range -1.5 to 1.5 are background noise.
 
 
 
