@@ -12,6 +12,7 @@ ToDo
 [X] More sophisticated feature selection for submission 4
 [X] RF with bagging for submission 5
 [] RF with boosting for submission 6
+[] Create summary 
 
 Nearing end:
 [] Upload Model https://www.kaggle.com/forums/t/3821/model-submission-best-practices
