@@ -66,7 +66,7 @@ create_plot <- function(data, v) {
 
 
 
-### Primitives
+### Primitive Variables
 
 **PRI_tau_pt**
 
@@ -972,4 +972,69 @@ summary(train[-signal, "PRI_jet_all_pt"])
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##     0.0     0.0    33.6    63.6    89.8  1630.0
 ```
+
+### Derived Variables
+**DER_mass_MMC**
+
+The estimated mass of the Higgs boson candidate. May be undeﬁned.
+
+```r
+create_plot(train, "DER_mass_MMC")
+```
+
+![plot of chunk der_mass_mmc](figure/der_mass_mmc.png) 
+
+
+```r
+dmm.na <- subset(train, DER_mass_MMC == -999, select = Label)
+table(dmm.na)
+```
+
+```
+## dmm.na
+##     b     s 
+## 35279  2835
+```
+
+```r
+length(which(dmm.na == "b"))/nrow(dmm.na)
+```
+
+```
+## [1] 0.9256
+```
+
+93% of undefined are background
+
+```r
+dmm <- subset(train, DER_mass_MMC != -999)
+create_plot(dmm, "DER_mass_MMC")
+```
+
+![plot of chunk der_mass_mmc_defined](figure/der_mass_mmc_defined.png) 
+
+
+```r
+dmm.250 <- subset(dmm, DER_mass_MMC < 250)
+v <- "DER_mass_MMC"
+p <- ggplot(dmm.250, aes(x = EventId, y = dmm.250[, v], color = Label), environment = environment())
+l <- p + labs(y = v)
+print(l + geom_point() + geom_hline(yintercept = c(75, 175)))
+```
+
+![plot of chunk der_mass_mmc_250](figure/der_mass_mmc_250.png) 
+
+
+```r
+dmm.signal <- subset(dmm, Label == "s")
+dmm.signal.inrange <- subset(dmm.signal, DER_mass_MMC >= 75 & DER_mass_MMC <= 
+    175)
+nrow(dmm.signal.inrange)/nrow(dmm.signal)
+```
+
+```
+## [1] 0.9702
+```
+
+97% of defined signal observations lie in range 75 to 175
 
