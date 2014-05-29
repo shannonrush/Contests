@@ -629,27 +629,48 @@ length(which(pjle.na == "b"))/nrow(pjle.na)
 ```r
 pjle <- subset(train, PRI_jet_leading_eta != -999)
 v <- "PRI_jet_leading_eta"
-p <- ggplot(data, aes(x = EventId, y = data[, v], color = Label), environment = environment())
-```
-
-```
-## Error: ggplot2 doesn't know how to deal with data of class function
-```
-
-```r
+p <- ggplot(pjle, aes(x = EventId, y = pjle[, v], color = Label), environment = environment())
 l <- p + labs(y = v)
-```
-
-```
-## Error: object 'p' not found
-```
-
-```r
 print(l + geom_point() + geom_hline(yintercept = c(-1.5, 1.5)))
 ```
 
+![plot of chunk pri_jet_leading_eta_defined](figure/pri_jet_leading_eta_defined.png) 
+
+
+```r
+pjle.inrange <- which(pjle$PRI_jet_leading_eta >= -1.5 & pjle$PRI_jet_leading_eta <= 
+    1.5)
+table(pjle[pjle.inrange, "Label"])
 ```
-## Error: object 'l' not found
+
+```
+## 
+##     b     s 
+## 55373 27680
+```
+
+```r
+nrow(subset(pjle[pjle.inrange, ], Label == "b"))/length(pjle.inrange)
+```
+
+```
+## [1] 0.6667
+```
+
+67% of defined observations in the -1.5 to 1.5 range are background
+
+What percentange of defined observations outside the -1.5 to 1.5 range are signal?
+
+```r
+out.range <- subset(pjle, PRI_jet_leading_eta < -1.5 | PRI_jet_leading_eta > 
+    1.5, select = "Label")
+table(out.range)
+```
+
+```
+## out.range
+##     b     s 
+## 34539 32495
 ```
 
 
@@ -683,5 +704,272 @@ summary(pjle[-pjle.signal, "PRI_jet_leading_eta"])
 ##  -4.500  -1.170   0.002  -0.004   1.170   4.490
 ```
 
+**PRI_jet_leading_phi**
 
+The azimuth angle φ of the leading jet (undeﬁned if PRI jet num = 0).
+
+
+```r
+create_plot(train, "PRI_jet_leading_phi")
+```
+
+![plot of chunk pri_jet_leading_phi](figure/pri_jet_leading_phi.png) 
+
+
+```r
+pjlphi.na <- subset(train, PRI_jet_leading_phi == -999, select = Label)
+table(pjlphi.na)
+```
+
+```
+## pjlphi.na
+##     b     s 
+## 74421 25492
+```
+
+```r
+length(which(pjlphi.na == "b"))/nrow(pjlphi.na)
+```
+
+```
+## [1] 0.7449
+```
+
+75% of undefined are background
+
+```r
+pjlphi <- subset(train, PRI_jet_leading_phi != -999)
+create_plot(pjlphi, "PRI_jet_leading_phi")
+```
+
+![plot of chunk pri_jet_leading_phi_defined](figure/pri_jet_leading_phi_defined.png) 
+
+
+```r
+summary(pjlphi$PRI_jet_leading_phi)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -3.1400 -1.5800 -0.0330 -0.0124  1.5600  3.1400
+```
+
+```r
+pjlphi.signal <- which(pjlphi$Label == "s")
+# just the signal
+summary(pjlphi[pjlphi.signal, "PRI_jet_leading_phi"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -3.1400 -1.5900 -0.0360 -0.0129  1.5700  3.1400
+```
+
+```r
+# just the background
+summary(pjlphi[-pjlphi.signal, "PRI_jet_leading_phi"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -3.1400 -1.5800 -0.0310 -0.0121  1.5600  3.1400
+```
+
+**PRI_jet_subleading_pt**
+
+The transverse momentum $\sqrt{p^2_x+p^2_y}$ of the second leading jet. 
+ (undeﬁned if PRI jet num ≤ 1).
+ 
+
+```r
+create_plot(train, "PRI_jet_subleading_pt")
+```
+
+![plot of chunk pri_jet_subleading_pt](figure/pri_jet_subleading_pt.png) 
+
+
+```r
+pjsp.na <- subset(train, PRI_jet_subleading_pt == -999, select = Label)
+table(pjsp.na)
+```
+
+```
+## pjsp.na
+##      b      s 
+## 124255  53202
+```
+
+```r
+length(which(pjsp.na == "b"))/nrow(pjsp.na)
+```
+
+```
+## [1] 0.7002
+```
+
+70% of undefined are background
+
+```r
+pjsp <- subset(train, PRI_jet_subleading_pt != -999)
+create_plot(pjsp, "PRI_jet_subleading_pt")
+```
+
+![plot of chunk pri_jet_subleading_pt_defined](figure/pri_jet_subleading_pt_defined.png) 
+
+
+```r
+summary(pjsp$PRI_jet_subleading_pt)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    30.0    37.3    47.9    57.7    66.6   721.0
+```
+
+```r
+pjsp.signal <- which(pjsp$Label == "s")
+# just the signal
+summary(pjsp[pjsp.signal, "PRI_jet_subleading_pt"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    30.0    37.8    48.6    56.9    66.8   422.0
+```
+
+```r
+# just the background
+summary(pjsp[-pjsp.signal, "PRI_jet_subleading_pt"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    30.0    37.0    47.4    58.3    66.5   721.0
+```
+
+**PRI_jet_subleading_phi**
+
+The azimuth angle φ of the subleading jet (undeﬁned if PRI jet num ≤ 1).
+
+```r
+create_plot(train, "PRI_jet_subleading_phi")
+```
+
+![plot of chunk pri_jet_subleading_phi](figure/pri_jet_subleading_phi.png) 
+
+
+```r
+pjsphi.na <- subset(train, PRI_jet_subleading_phi == -999, select = Label)
+table(pjsphi.na)
+```
+
+```
+## pjsphi.na
+##      b      s 
+## 124255  53202
+```
+
+```r
+length(which(pjsphi.na == "b"))/nrow(pjsphi.na)
+```
+
+```
+## [1] 0.7002
+```
+
+70% of undefined are background
+
+```r
+pjsphi <- subset(train, PRI_jet_subleading_phi != -999)
+create_plot(pjsphi, "PRI_jet_subleading_phi")
+```
+
+![plot of chunk pri_jet_subleading_phi_defined](figure/pri_jet_subleading_phi_defined.png) 
+
+
+```r
+summary(pjsphi$PRI_jet_subleading_phi)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -3.1400 -1.5800 -0.0020 -0.0016  1.5800  3.1400
+```
+
+```r
+pjsphi.signal <- which(pjsphi$Label == "s")
+# just the signal
+summary(pjsphi[pjsphi.signal, "PRI_jet_subleading_phi"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -3.1400 -1.5900 -0.0240 -0.0143  1.5600  3.1400
+```
+
+```r
+# just the background
+summary(pjsphi[-pjsphi.signal, "PRI_jet_subleading_phi"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -3.1400 -1.5700  0.0160  0.0087  1.5900  3.1400
+```
+
+**PRI_jet_all_pt** 
+
+The scalar sum of the transverse momentum of all the jets.
+
+```r
+create_plot(train, "PRI_jet_all_pt")
+```
+
+![plot of chunk pri_jet_all_pt](figure/pri_jet_all_pt.png) 
+
+
+```r
+pjap.500 <- subset(train, PRI_jet_all_pt < 500)
+create_plot(pjap.500, "PRI_jet_all_pt")
+```
+
+![plot of chunk pri_jet_all_pt_500](figure/pri_jet_all_pt_500.png) 
+
+
+```r
+pjap.300 <- subset(train, PRI_jet_all_pt < 300)
+create_plot(pjap.300, "PRI_jet_all_pt")
+```
+
+![plot of chunk pri_jet_all_pt_300](figure/pri_jet_all_pt_300.png) 
+
+
+```r
+summary(train$PRI_jet_all_pt)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     0.0     0.0    40.5    73.1   110.0  1630.0
+```
+
+```r
+# just the signal
+summary(train[signal, "PRI_jet_all_pt"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     0.0     0.0    68.0    91.3   139.0  1190.0
+```
+
+```r
+# just the background
+summary(train[-signal, "PRI_jet_all_pt"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     0.0     0.0    33.6    63.6    89.8  1630.0
+```
 

@@ -34,7 +34,7 @@ of the training set and saved a new CSV as processed_train.csv
 ```
 
 
-### Primitives
+### Primitive Variables
 
 **PRI_tau_pt**
 
@@ -290,9 +290,6 @@ What percentange of defined observations outside the -1.5 to 1.5 range are signa
     out.range <- subset(pjle, PRI_jet_leading_eta < -1.5 | PRI_jet_leading_eta > 1.5, select="Label")
     table(out.range)
 ```
-
-
-
 ```{r pri_jet_leading_eta_summary}
     summary(pjle$PRI_jet_leading_eta)
     pjle.signal <- which(pjle$Label=="s")
@@ -301,5 +298,100 @@ What percentange of defined observations outside the -1.5 to 1.5 range are signa
     # just the background
     summary(pjle[-pjle.signal,"PRI_jet_leading_eta"])
 ```
+**PRI_jet_leading_phi**
 
+The azimuth angle φ of the leading jet (undeﬁned if PRI jet num = 0).
 
+```{r pri_jet_leading_phi, fig.width=8, cache=TRUE}
+    create_plot(train, "PRI_jet_leading_phi")
+```
+```{r pri_jet_leading_phi_na}
+    pjlphi.na <- subset(train, PRI_jet_leading_phi == -999.0, select=Label)
+    table(pjlphi.na)
+    length(which(pjlphi.na=="b"))/nrow(pjlphi.na)
+```
+75% of undefined are background
+```{r pri_jet_leading_phi_defined, fig.width=8, cache=TRUE}
+    pjlphi <- subset(train, PRI_jet_leading_phi != -999.0)
+    create_plot(pjlphi, "PRI_jet_leading_phi")
+```
+```{r pri_jet_leading_phi_summary}
+    summary(pjlphi$PRI_jet_leading_phi)
+    pjlphi.signal <- which(pjlphi$Label=="s")
+    # just the signal
+    summary(pjlphi[pjlphi.signal,"PRI_jet_leading_phi"])
+    # just the background
+    summary(pjlphi[-pjlphi.signal,"PRI_jet_leading_phi"])
+```
+**PRI_jet_subleading_pt**
+
+The transverse momentum $\sqrt{p^2_x+p^2_y}$ of the second leading jet. 
+ (undeﬁned if PRI jet num ≤ 1).
+ 
+```{r pri_jet_subleading_pt, fig.width=8, cache=TRUE}
+    create_plot(train, "PRI_jet_subleading_pt")
+```
+```{r pri_jet_subleading_pt_na}
+    pjsp.na <- subset(train, PRI_jet_subleading_pt == -999.0, select=Label)
+    table(pjsp.na)
+    length(which(pjsp.na=="b"))/nrow(pjsp.na)
+```
+70% of undefined are background
+```{r pri_jet_subleading_pt_defined, fig.width=8, cache=TRUE}
+    pjsp <- subset(train, PRI_jet_subleading_pt != -999.0)
+    create_plot(pjsp, "PRI_jet_subleading_pt")
+```
+```{r pri_jet_subleading_pt_summary}
+    summary(pjsp$PRI_jet_subleading_pt)
+    pjsp.signal <- which(pjsp$Label=="s")
+    # just the signal
+    summary(pjsp[pjsp.signal,"PRI_jet_subleading_pt"])
+    # just the background
+    summary(pjsp[-pjsp.signal,"PRI_jet_subleading_pt"])
+```
+**PRI_jet_subleading_phi**
+
+The azimuth angle φ of the subleading jet (undeﬁned if PRI jet num ≤ 1).
+```{r pri_jet_subleading_phi, fig.width=8, cache=TRUE}
+    create_plot(train, "PRI_jet_subleading_phi")
+```
+```{r pri_jet_subleading_phi_na}
+    pjsphi.na <- subset(train, PRI_jet_subleading_phi == -999.0, select=Label)
+    table(pjsphi.na)
+    length(which(pjsphi.na=="b"))/nrow(pjsphi.na)
+```
+70% of undefined are background
+```{r pri_jet_subleading_phi_defined, fig.width=8, cache=TRUE}
+    pjsphi <- subset(train, PRI_jet_subleading_phi != -999.0)
+    create_plot(pjsphi, "PRI_jet_subleading_phi")
+```
+```{r pri_jet_subleading_phi_summary}
+    summary(pjsphi$PRI_jet_subleading_phi)
+    pjsphi.signal <- which(pjsphi$Label=="s")
+    # just the signal
+    summary(pjsphi[pjsphi.signal,"PRI_jet_subleading_phi"])
+    # just the background
+    summary(pjsphi[-pjsphi.signal,"PRI_jet_subleading_phi"])
+```
+**PRI_jet_all_pt** 
+
+The scalar sum of the transverse momentum of all the jets.
+```{r pri_jet_all_pt, fig.width=8, cache=TRUE}
+    create_plot(train, "PRI_jet_all_pt")
+```
+```{r pri_jet_all_pt_500, fig.width=8, cache=TRUE}
+    pjap.500 <- subset(train, PRI_jet_all_pt < 500)
+    create_plot(pjap.500, "PRI_jet_all_pt")
+```
+```{r pri_jet_all_pt_300, fig.width=8, cache=TRUE}
+    pjap.300 <- subset(train, PRI_jet_all_pt < 300)
+    create_plot(pjap.300, "PRI_jet_all_pt")
+```
+```{r pri_jet_all_pt_summary}
+    summary(train$PRI_jet_all_pt)
+    # just the signal
+    summary(train[signal,"PRI_jet_all_pt"])
+    # just the background
+    summary(train[-signal,"PRI_jet_all_pt"])
+```
+### Derived Variables
