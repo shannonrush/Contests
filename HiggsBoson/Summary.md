@@ -399,8 +399,289 @@ nrow(under.25)/length(signal)
 
 About 38% of the signal is < 25 
 
+**PRI_met_phi**
+
+The azimuth angle φ of the missing transverse energy.
 
 
+```r
+create_plot(train, "PRI_met_phi")
+```
+
+![plot of chunk pri_met_phi](figure/pri_met_phi.png) 
+
+
+```r
+summary(train$PRI_met_phi)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -3.1400 -1.5800 -0.0240 -0.0101  1.5600  3.1400
+```
+
+```r
+# just the signal
+summary(train[signal, "PRI_met_phi"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -3.1400 -1.5500  0.0190  0.0086  1.5800  3.1400
+```
+
+```r
+# just the background
+summary(train[-signal, "PRI_met_phi"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -3.1400 -1.5800 -0.0440 -0.0199  1.5500  3.1400
+```
+
+
+**PRI_met_sumet**
+
+The total transverse energy in the detector.
+
+```r
+create_plot(train, "PRI_met_sumet")
+```
+
+![plot of chunk pri_met_sumet](figure/pri_met_sumet.png) 
+
+
+```r
+summary(train$PRI_met_sumet)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    13.7   123.0   180.0   210.0   263.0  2000.0
+```
+
+```r
+# just the signal
+summary(train[signal, "PRI_met_sumet"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    13.7   146.0   208.0   234.0   291.0  1390.0
+```
+
+```r
+# just the background
+summary(train[-signal, "PRI_met_sumet"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    18.5   114.0   166.0   197.0   246.0  2000.0
+```
+
+
+```r
+pms.750 <- subset(train, PRI_met_sumet < 750)
+create_plot(pms.750, "PRI_met_sumet")
+```
+
+![plot of chunk pri_met_sumet_750](figure/pri_met_sumet_750.png) 
+
+
+```r
+pms.300 <- subset(train, PRI_met_sumet < 300)
+create_plot(pms.300, "PRI_met_sumet")
+```
+
+![plot of chunk pri_met_sumet_300](figure/pri_met_sumet_300.png) 
+
+
+```r
+pms.200 <- subset(train, PRI_met_sumet < 200)
+create_plot(pms.200, "PRI_met_sumet")
+```
+
+![plot of chunk pri_met_sumet_200](figure/pri_met_sumet_200.png) 
+
+**PRI_jet_num**
+
+The number of jets (a narrow cone of hadrons and other particles produced by the 
+hadronization of a quark or gluon)
+http://en.wikipedia.org/wiki/Jet_(particle_physics)
+
+
+```r
+ggplot(data = train, aes(x = PRI_jet_num, fill = Label)) + geom_bar(position = position_dodge())
+```
+
+```
+## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
+```
+
+![plot of chunk pri_jet_num](figure/pri_jet_num.png) 
+
+**PRI_jet_leading_pt** 
+The transverse momentum $\sqrt{p^2_x+p^2_y}$ of the leading jet, that is the jet with
+largest transverse momentum (undeﬁned if PRI jet num = 0).
+
+
+```r
+create_plot(train, "PRI_jet_leading_pt")
+```
+
+![plot of chunk pri_jet_leading_pt](figure/pri_jet_leading_pt.png) 
+
+
+```r
+pjlp.na <- subset(train, PRI_jet_leading_pt == -999, select = Label)
+table(pjlp.na)
+```
+
+```
+## pjlp.na
+##     b     s 
+## 74421 25492
+```
+
+```r
+length(which(pjlp.na == "b"))/nrow(pjlp.na)
+```
+
+```
+## [1] 0.7449
+```
+
+75% of undefined are background.
+
+```r
+pjlp <- subset(train, PRI_jet_leading_pt != -999)
+create_plot(pjlp, "PRI_jet_leading_pt")
+```
+
+![plot of chunk pri_jet_leading_pt_defined](figure/pri_jet_leading_pt_defined.png) 
+
+
+```r
+summary(pjlp$PRI_jet_leading_pt)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    30.0    44.4    65.6    84.8   103.0  1120.0
+```
+
+```r
+pjlp.signal <- which(pjlp$Label == "s")
+# just the signal
+summary(pjlp[pjlp.signal, "PRI_jet_leading_pt"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    30.0    50.1    74.4    92.9   114.0   738.0
+```
+
+```r
+# just the background
+summary(pjlp[-pjlp.signal, "PRI_jet_leading_pt"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    30.0    41.7    60.1    79.4    95.2  1120.0
+```
+
+**PRI_jet_leading_eta**
+
+The pseudorapidity η of the leading jet (undeﬁned if PRI jet num = 0).
+
+
+```r
+create_plot(train, "PRI_jet_leading_eta")
+```
+
+![plot of chunk pri_jet_leading_eta](figure/pri_jet_leading_eta.png) 
+
+
+```r
+pjle.na <- subset(train, PRI_jet_leading_eta == -999, select = Label)
+table(pjle.na)
+```
+
+```
+## pjle.na
+##     b     s 
+## 74421 25492
+```
+
+```r
+length(which(pjle.na == "b"))/nrow(pjle.na)
+```
+
+```
+## [1] 0.7449
+```
+
+74% of undefined are background.
+
+```r
+pjle <- subset(train, PRI_jet_leading_eta != -999)
+v <- "PRI_jet_leading_eta"
+p <- ggplot(data, aes(x = EventId, y = data[, v], color = Label), environment = environment())
+```
+
+```
+## Error: ggplot2 doesn't know how to deal with data of class function
+```
+
+```r
+l <- p + labs(y = v)
+```
+
+```
+## Error: object 'p' not found
+```
+
+```r
+print(l + geom_point() + geom_hline(yintercept = c(-1.5, 1.5)))
+```
+
+```
+## Error: object 'l' not found
+```
+
+
+```r
+summary(pjle$PRI_jet_leading_eta)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  -4.500  -1.340   0.000  -0.003   1.340   4.500
+```
+
+```r
+pjle.signal <- which(pjle$Label == "s")
+# just the signal
+summary(pjle[pjle.signal, "PRI_jet_leading_eta"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  -4.500  -1.630  -0.005  -0.003   1.620   4.500
+```
+
+```r
+# just the background
+summary(pjle[-pjle.signal, "PRI_jet_leading_eta"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  -4.500  -1.170   0.002  -0.004   1.170   4.490
+```
 
 
 

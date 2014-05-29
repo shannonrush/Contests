@@ -184,8 +184,122 @@ There appears to be a lot of signal clustered < 25
 ```
 About 38% of the signal is < 25 
 
+**PRI_met_phi**
+
+The azimuth angle φ of the missing transverse energy.
+
+```{r pri_met_phi, fig.width=8, cache=TRUE}
+    create_plot(train, "PRI_met_phi")
+```
+```{r pri_met_phi_summary}
+    summary(train$PRI_met_phi)
+    # just the signal
+    summary(train[signal,"PRI_met_phi"])
+    # just the background
+    summary(train[-signal,"PRI_met_phi"])
+```
+
+**PRI_met_sumet**
+
+The total transverse energy in the detector.
+```{r pri_met_sumet, fig.width=8, cache=TRUE}
+    create_plot(train, "PRI_met_sumet")
+```
+```{r pri_met_sumet_summary}
+    summary(train$PRI_met_sumet)
+    # just the signal
+    summary(train[signal,"PRI_met_sumet"])
+    # just the background
+    summary(train[-signal,"PRI_met_sumet"])
+```
+```{r pri_met_sumet_750, fig.width=8, cache=TRUE}
+    pms.750 <- subset(train, PRI_met_sumet < 750)
+    create_plot(pms.750, "PRI_met_sumet")
+```
+```{r pri_met_sumet_300, fig.width=8, cache=TRUE}
+    pms.300 <- subset(train, PRI_met_sumet < 300)
+    create_plot(pms.300, "PRI_met_sumet")
+```
+```{r pri_met_sumet_200, fig.width=8, cache=TRUE}
+    pms.200 <- subset(train, PRI_met_sumet < 200)
+    create_plot(pms.200, "PRI_met_sumet")
+```
+**PRI_jet_num**
+
+The number of jets (a narrow cone of hadrons and other particles produced by the 
+hadronization of a quark or gluon)
+http://en.wikipedia.org/wiki/Jet_(particle_physics)
+
+```{r pri_jet_num, fig.width=8, cache=TRUE}
+    ggplot(data=train, aes(x=PRI_jet_num, fill=Label)) + geom_bar(position=position_dodge())
+```
+**PRI_jet_leading_pt** 
+The transverse momentum $\sqrt{p^2_x+p^2_y}$ of the leading jet, that is the jet with
+largest transverse momentum (undeﬁned if PRI jet num = 0).
+
+```{r pri_jet_leading_pt, fig.width=8, cache=TRUE}
+    create_plot(train, "PRI_jet_leading_pt")
+```
+```{r pri_jet_leading_pt_na}
+    pjlp.na <- subset(train, PRI_jet_leading_pt == -999.0, select=Label)
+    table(pjlp.na)
+    length(which(pjlp.na=="b"))/nrow(pjlp.na)
+```
+75% of undefined are background.
+```{r pri_jet_leading_pt_defined, fig.width=8, cache=TRUE}
+    pjlp <- subset(train, PRI_jet_leading_pt != -999.0)
+    create_plot(pjlp, "PRI_jet_leading_pt")
+```
+```{r pri_jet_leading_pt_summary}
+    summary(pjlp$PRI_jet_leading_pt)
+    pjlp.signal <- which(pjlp$Label=="s")
+    # just the signal
+    summary(pjlp[pjlp.signal,"PRI_jet_leading_pt"])
+    # just the background
+    summary(pjlp[-pjlp.signal,"PRI_jet_leading_pt"])
+```
+**PRI_jet_leading_eta**
+
+The pseudorapidity η of the leading jet (undeﬁned if PRI jet num = 0).
+
+```{r pri_jet_leading_eta, fig.width=8, cache=TRUE}
+    create_plot(train, "PRI_jet_leading_eta")
+```
+```{r pri_jet_leading_eta_na}
+    pjle.na <- subset(train, PRI_jet_leading_eta == -999.0, select=Label)
+    table(pjle.na)
+    length(which(pjle.na=="b"))/nrow(pjle.na)
+```
+74% of undefined are background.
+```{r pri_jet_leading_eta_defined, fig.width=8, cache=TRUE}
+    pjle <- subset(train, PRI_jet_leading_eta != -999.0)
+    v <- "PRI_jet_leading_eta"
+    p <- ggplot(pjle, aes(x=EventId, y=pjle[,v], color=Label), environment=environment())
+    l <- p + labs(y=v)
+    print(l + geom_point() + geom_hline(yintercept=c(-1.5,1.5)))
+```
+```{r pjle_background_in_range}
+    pjle.inrange <- which(pjle$PRI_jet_leading_eta >= -1.5 & pjle$PRI_jet_leading_eta <= 1.5)
+    table(pjle[pjle.inrange,"Label"])
+    nrow(subset(pjle[pjle.inrange,],Label=="b"))/length(pjle.inrange)
+```
+67% of defined observations in the -1.5 to 1.5 range are background
+
+What percentange of defined observations outside the -1.5 to 1.5 range are signal?
+```{r pjle_signal_out_range}
+    out.range <- subset(pjle, PRI_jet_leading_eta < -1.5 | PRI_jet_leading_eta > 1.5, select="Label")
+    table(out.range)
+```
 
 
 
+```{r pri_jet_leading_eta_summary}
+    summary(pjle$PRI_jet_leading_eta)
+    pjle.signal <- which(pjle$Label=="s")
+    # just the signal
+    summary(pjle[pjle.signal,"PRI_jet_leading_eta"])
+    # just the background
+    summary(pjle[-pjle.signal,"PRI_jet_leading_eta"])
+```
 
 
