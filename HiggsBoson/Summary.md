@@ -185,7 +185,6 @@ summary(train$PRI_tau_phi)
 ```
 
 ```r
-# just the signal
 summary(train[signal, "PRI_tau_phi"])
 ```
 
@@ -195,7 +194,6 @@ summary(train[signal, "PRI_tau_phi"])
 ```
 
 ```r
-# just the background
 summary(train[-signal, "PRI_tau_phi"])
 ```
 
@@ -307,7 +305,6 @@ summary(train$PRI_lep_phi)
 ```
 
 ```r
-# just the signal
 summary(train[signal, "PRI_lep_phi"])
 ```
 
@@ -317,7 +314,6 @@ summary(train[signal, "PRI_lep_phi"])
 ```
 
 ```r
-# just the background
 summary(train[-signal, "PRI_lep_phi"])
 ```
 
@@ -347,7 +343,6 @@ summary(train$PRI_met)
 ```
 
 ```r
-# just the signal
 summary(train[signal, "PRI_met"])
 ```
 
@@ -357,7 +352,6 @@ summary(train[signal, "PRI_met"])
 ```
 
 ```r
-# just the background
 summary(train[-signal, "PRI_met"])
 ```
 
@@ -426,7 +420,6 @@ summary(train$PRI_met_phi)
 ```
 
 ```r
-# just the signal
 summary(train[signal, "PRI_met_phi"])
 ```
 
@@ -436,7 +429,6 @@ summary(train[signal, "PRI_met_phi"])
 ```
 
 ```r
-# just the background
 summary(train[-signal, "PRI_met_phi"])
 ```
 
@@ -467,7 +459,6 @@ summary(train$PRI_met_sumet)
 ```
 
 ```r
-# just the signal
 summary(train[signal, "PRI_met_sumet"])
 ```
 
@@ -477,7 +468,6 @@ summary(train[signal, "PRI_met_sumet"])
 ```
 
 ```r
-# just the background
 summary(train[-signal, "PRI_met_sumet"])
 ```
 
@@ -579,7 +569,6 @@ summary(pjlp$PRI_jet_leading_pt)
 
 ```r
 pjlp.signal <- which(pjlp$Label == "s")
-# just the signal
 summary(pjlp[pjlp.signal, "PRI_jet_leading_pt"])
 ```
 
@@ -589,7 +578,6 @@ summary(pjlp[pjlp.signal, "PRI_jet_leading_pt"])
 ```
 
 ```r
-# just the background
 summary(pjlp[-pjlp.signal, "PRI_jet_leading_pt"])
 ```
 
@@ -687,7 +675,6 @@ summary(pjle$PRI_jet_leading_eta)
 
 ```r
 pjle.signal <- which(pjle$Label == "s")
-# just the signal
 summary(pjle[pjle.signal, "PRI_jet_leading_eta"])
 ```
 
@@ -697,7 +684,6 @@ summary(pjle[pjle.signal, "PRI_jet_leading_eta"])
 ```
 
 ```r
-# just the background
 summary(pjle[-pjle.signal, "PRI_jet_leading_eta"])
 ```
 
@@ -758,7 +744,6 @@ summary(pjlphi$PRI_jet_leading_phi)
 
 ```r
 pjlphi.signal <- which(pjlphi$Label == "s")
-# just the signal
 summary(pjlphi[pjlphi.signal, "PRI_jet_leading_phi"])
 ```
 
@@ -768,7 +753,6 @@ summary(pjlphi[pjlphi.signal, "PRI_jet_leading_phi"])
 ```
 
 ```r
-# just the background
 summary(pjlphi[-pjlphi.signal, "PRI_jet_leading_phi"])
 ```
 
@@ -830,7 +814,6 @@ summary(pjsp$PRI_jet_subleading_pt)
 
 ```r
 pjsp.signal <- which(pjsp$Label == "s")
-# just the signal
 summary(pjsp[pjsp.signal, "PRI_jet_subleading_pt"])
 ```
 
@@ -840,7 +823,6 @@ summary(pjsp[pjsp.signal, "PRI_jet_subleading_pt"])
 ```
 
 ```r
-# just the background
 summary(pjsp[-pjsp.signal, "PRI_jet_subleading_pt"])
 ```
 
@@ -900,7 +882,6 @@ summary(pjsphi$PRI_jet_subleading_phi)
 
 ```r
 pjsphi.signal <- which(pjsphi$Label == "s")
-# just the signal
 summary(pjsphi[pjsphi.signal, "PRI_jet_subleading_phi"])
 ```
 
@@ -910,7 +891,6 @@ summary(pjsphi[pjsphi.signal, "PRI_jet_subleading_phi"])
 ```
 
 ```r
-# just the background
 summary(pjsphi[-pjsphi.signal, "PRI_jet_subleading_phi"])
 ```
 
@@ -956,7 +936,6 @@ summary(train$PRI_jet_all_pt)
 ```
 
 ```r
-# just the signal
 summary(train[signal, "PRI_jet_all_pt"])
 ```
 
@@ -966,7 +945,6 @@ summary(train[signal, "PRI_jet_all_pt"])
 ```
 
 ```r
-# just the background
 summary(train[-signal, "PRI_jet_all_pt"])
 ```
 
@@ -1086,7 +1064,6 @@ summary(train$DER_mass_transverse_met_lep)
 ```
 
 ```r
-# just the signal
 summary(train[signal, "DER_mass_transverse_met_lep"])
 ```
 
@@ -1096,7 +1073,6 @@ summary(train[signal, "DER_mass_transverse_met_lep"])
 ```
 
 ```r
-# just the background
 summary(train[-signal, "DER_mass_transverse_met_lep"])
 ```
 
@@ -1119,11 +1095,24 @@ CreatePlot(train, "DER_mass_vis", 150)
 
 ```r
 dmv.150 <- subset(train, DER_mass_vis < 150)
-CreatePlot(dmv.150, "DER_mass_vis")
+CreatePlot(dmv.150, "DER_mass_vis", c(50, 125))
 ```
 
 ![plot of chunk der_mass_vis_150](figure/der_mass_vis_150.png) 
 
+What percentage of all signal are between 50 and 125?
+
+```r
+dmv.signal.inrange <- subset(train[signal, ], DER_mass_vis >= 50 & DER_mass_vis <= 
+    125)
+nrow(dmv.signal.inrange)/nrow(train[signal, ])
+```
+
+```
+## [1] 0.9494
+```
+
+95% of all signal observations found in range 50 to 125
 
 ```r
 summary(train$DER_mass_vis)
@@ -1135,7 +1124,6 @@ summary(train$DER_mass_vis)
 ```
 
 ```r
-# just the signal
 summary(train[signal, "DER_mass_vis"])
 ```
 
@@ -1145,7 +1133,6 @@ summary(train[signal, "DER_mass_vis"])
 ```
 
 ```r
-# just the background
 summary(train[-signal, "DER_mass_vis"])
 ```
 
@@ -1154,4 +1141,323 @@ summary(train[-signal, "DER_mass_vis"])
 ##     6.3    55.5    69.7    81.6    92.7  1350.0
 ```
 
+**DER_pt_h**
+
+The modulus of the vector sum of the transverse momentum of the hadronic tau,
+the lepton, and the missing transverse energy vector.
+
+
+```r
+CreatePlot(train, "DER_pt_h", 400)
+```
+
+![plot of chunk der_pt_h](figure/der_pt_h.png) 
+
+
+```r
+dph.400 <- subset(train, DER_pt_h < 400)
+CreatePlot(dph.400, "DER_pt_h")
+```
+
+![plot of chunk der_pt_h_400](figure/der_pt_h_400.png) 
+
+
+```r
+dph.200 <- subset(train, DER_pt_h < 200)
+CreatePlot(dph.200, "DER_pt_h", 50)
+```
+
+![plot of chunk der_pt_h_200](figure/der_pt_h_200.png) 
+
+
+```r
+dph.50 <- subset(train, DER_pt_h < 50)
+CreatePlot(dph.50, "DER_pt_h")
+```
+
+![plot of chunk der_pt_h_50](figure/der_pt_h_50.png) 
+
+What percentage of total signal > 50?
+
+```r
+dph.signal.inrange <- subset(train[signal, ], DER_pt_h > 50)
+nrow(dph.signal.inrange)/nrow(train[signal, ])
+```
+
+```
+## [1] 0.5299
+```
+
+53% of total signal found > 50
+
+```r
+summary(train$DER_pt_h)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     0.0    14.1    38.5    57.9    79.2  2830.0
+```
+
+```r
+summary(train[signal, "DER_pt_h"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     0.0    23.5    54.4    74.9   105.0  2830.0
+```
+
+```r
+summary(train[-signal, "DER_pt_h"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     0.0     8.4    32.9    49.0    65.7  1050.0
+```
+
+**DER_deltaeta_jet_jet**
+
+The pseudorapidity separation (the angular separation)  between the two jets (undeﬁned if
+PRI jet num ≤ 1).
+
+
+```r
+CreatePlot(train, "DER_deltaeta_jet_jet")
+```
+
+![plot of chunk der_deltaeta_jet_jet](figure/der_deltaeta_jet_jet.png) 
+
+
+```r
+ddjj.na <- subset(train, DER_deltaeta_jet_jet == -999, select = Label)
+table(ddjj.na)
+```
+
+```
+## ddjj.na
+##      b      s 
+## 124255  53202
+```
+
+```r
+length(which(ddjj.na == "b"))/nrow(ddjj.na)
+```
+
+```
+## [1] 0.7002
+```
+
+70% of undefined observations are background
+
+```r
+ddjj <- subset(train, DER_deltaeta_jet_jet != -999)
+CreatePlot(ddjj, "DER_deltaeta_jet_jet")
+```
+
+![plot of chunk der_deltaeta_jet_jet_defined](figure/der_deltaeta_jet_jet_defined.png) 
+
+
+```r
+summary(ddjj$DER_deltaeta_jet_jet)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.000   0.883   2.110   2.400   3.690   8.500
+```
+
+```r
+ddjj.signal <- which(ddjj$Label == "s")
+summary(ddjj[ddjj.signal, "DER_deltaeta_jet_jet"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    0.00    1.19    3.15    3.04    4.56    8.50
+```
+
+```r
+summary(ddjj[-ddjj.signal, "DER_deltaeta_jet_jet"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.000   0.758   1.620   1.890   2.750   7.890
+```
+
+**DER_mass_jet_jet**
+
+The invariant mass of the two jets (undeﬁned if PRI jet num ≤ 1).
+
+```r
+CreatePlot(train, "DER_mass_jet_jet")
+```
+
+![plot of chunk der_mass_jet_jet](figure/der_mass_jet_jet.png) 
+
+
+```r
+dmjj.na <- subset(train, DER_mass_jet_jet == -999, select = Label)
+table(dmjj.na)
+```
+
+```
+## dmjj.na
+##      b      s 
+## 124255  53202
+```
+
+```r
+length(which(dmjj.na == "b"))/nrow(dmjj.na)
+```
+
+```
+## [1] 0.7002
+```
+
+70% of undefined observations are background
+
+```r
+dmjj <- subset(train, DER_mass_jet_jet != -999)
+CreatePlot(dmjj, "DER_mass_jet_jet")
+```
+
+![plot of chunk der_mass_jet_jet_defined](figure/der_mass_jet_jet_defined.png) 
+
+
+```r
+summary(dmjj$DER_mass_jet_jet)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##      14     112     226     372     478    4970
+```
+
+```r
+dmjj.signal <- which(dmjj$Label == "s")
+summary(dmjj[dmjj.signal, "DER_mass_jet_jet"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##      14     129     355     512     722    4970
+```
+
+```r
+summary(dmjj[-dmjj.signal, "DER_mass_jet_jet"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##      15     107     181     258     324    4060
+```
+
+**DER_prodeta_jet_jet**
+
+The absolute value of the product of the pseudorapidities of the two jets
+(undeﬁned if PRI jet num ≤ 1).
+
+
+```r
+CreatePlot(train, "DER_prodeta_jet_jet")
+```
+
+![plot of chunk der_prodeta_jet_jet](figure/der_prodeta_jet_jet.png) 
+
+
+```r
+dpjj.na <- subset(train, DER_prodeta_jet_jet == -999, select = Label)
+table(dpjj.na)
+```
+
+```
+## dpjj.na
+##      b      s 
+## 124255  53202
+```
+
+```r
+length(which(dpjj.na == "b"))/nrow(dpjj.na)
+```
+
+```
+## [1] 0.7002
+```
+
+70% of undefined observations are background
+
+```r
+dpjj <- subset(train, DER_prodeta_jet_jet != -999)
+CreatePlot(dpjj, "DER_prodeta_jet_jet")
+```
+
+![plot of chunk der_prodeta_jet_jet_defined](figure/der_prodeta_jet_jet_defined.png) 
+
+
+```r
+summary(dpjj$DER_prodeta_jet_jet)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -18.100  -2.630  -0.244  -0.822   0.958  16.700
+```
+
+```r
+dpjj.signal <- which(dpjj$Label == "s")
+summary(dpjj[dpjj.signal, "DER_prodeta_jet_jet"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -18.100  -4.590  -1.550  -1.990   0.435  16.600
+```
+
+```r
+summary(dpjj[-dpjj.signal, "DER_prodeta_jet_jet"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -15.500  -1.100   0.032   0.128   1.300  16.700
+```
+
+**DER_deltar_tau_lep**
+
+```r
+CreatePlot(train, "DER_deltar_tau_lep")
+```
+
+![plot of chunk der_deltar_tau_lep](figure/der_deltar_tau_lep.png) 
+
+
+```r
+summary(train$DER_deltar_tau_lep)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.208   1.810   2.490   2.370   2.960   5.680
+```
+
+```r
+summary(train[signal, "DER_deltar_tau_lep"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.264   1.870   2.530   2.390   2.970   5.210
+```
+
+```r
+summary(train[-signal, "DER_deltar_tau_lep"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.208   1.770   2.470   2.370   2.960   5.680
+```
 
