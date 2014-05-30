@@ -4,7 +4,8 @@ Higgs Boson Machine Learning Challenge
 The goal of this challenge is to identify which simulated ATLAS experiment proton-proton collision
 observations contain evidence of boson pairs ("signal"), and which do not ("background"). 
 
-The challenge is [hosted by Kaggle](http://www.kaggle.com/c/higgs-boson) and provided by [The Atlas Experiment](http://atlas.ch/).  Technical details are found in the [Laboratoire de l’Accélerateur Linéaire](http://higgsml.lal.in2p3.fr/) technical documentation [PDF](http://higgsml.lal.in2p3.fr/files/2014/04/documentation_v1.5.pdf)
+The challenge is [hosted by Kaggle](http://www.kaggle.com/c/higgs-boson) and provided by [The Atlas Experiment](http://atlas.ch/).  Technical details were found in the [Laboratoire de l’Accélerateur Linéaire](http://higgsml.lal.in2p3.fr/) technical documentation [PDF](http://higgsml.lal.in2p3.fr/files/2014/04/documentation_v1.5.pdf). Attempts at summarizing these are my own, and may be imperfect (or 
+completely off - I'm not a particle physicist!) [Pull requests to correct these](https://github.com/shannonrush/Contests/blob/master/HiggsBoson/Summary.Rmd) are welcome.
 
 # The Data
 
@@ -57,7 +58,7 @@ require(ggplot2)
 
 
 ```r
-create_plot <- function(data, v, yintercept = c()) {
+CreatePlot <- function(data, v, yintercept = c()) {
     p <- ggplot(data, aes(x = EventId, y = data[, v], color = Label), environment = environment())
     l <- p + labs(y = v)
     if (length(yintercept) == 0) {
@@ -78,7 +79,7 @@ The transverse momentum $\sqrt{p^2_x+p^2_y}$, or the momentum perpendicular to t
 
 
 ```r
-create_plot(train, "PRI_tau_pt")
+CreatePlot(train, "PRI_tau_pt")
 ```
 
 ![plot of chunk pri_tau_pt_fig](figure/pri_tau_pt_fig.png) 
@@ -98,7 +99,7 @@ Most observations are < 175 GeV, let's replot on that subset
 
 ```r
 ptp.175 <- subset(train, PRI_tau_pt < 175)
-create_plot(ptp.175, "PRI_tau_pt")
+CreatePlot(ptp.175, "PRI_tau_pt")
 ```
 
 ![plot of chunk subset_ptp_175](figure/subset_ptp_175.png) 
@@ -107,7 +108,7 @@ It looks like the slower the transverse momentum, the more likely the observatio
 
 ```r
 ptp.50 <- subset(train, PRI_tau_pt < 50)
-create_plot(ptp.50, "PRI_tau_pt")
+CreatePlot(ptp.50, "PRI_tau_pt")
 ```
 
 ![plot of chunk subset_ptp_50](figure/subset_ptp_50.png) 
@@ -118,7 +119,7 @@ The pseudorapidity η (the angle from the beam axis) of the hadronic tau.
 
 
 ```r
-create_plot(train, "PRI_tau_eta")
+CreatePlot(train, "PRI_tau_eta")
 ```
 
 ![plot of chunk pri_tau_eta_fig](figure/pri_tau_eta_fig.png) 
@@ -167,7 +168,7 @@ around the beam axis.
 
 
 ```r
-create_plot(train, "PRI_tau_phi")
+CreatePlot(train, "PRI_tau_phi")
 ```
 
 ![plot of chunk pri_tau_phi_fig](figure/pri_tau_phi_fig.png) 
@@ -209,7 +210,7 @@ The transverse momentum $\sqrt{p^2_x+p^2_y}$, or the momentum perpendicular to t
 
 
 ```r
-create_plot(train, "PRI_lep_pt")
+CreatePlot(train, "PRI_lep_pt")
 ```
 
 ![plot of chunk pri_lep_pt_fig](figure/pri_lep_pt_fig.png) 
@@ -218,7 +219,7 @@ Replotting to < 200
 
 ```r
 plp.200 <- subset(train, PRI_lep_pt < 200)
-create_plot(plp.200, "PRI_lep_pt")
+CreatePlot(plp.200, "PRI_lep_pt")
 ```
 
 ![plot of chunk pri_lep_pt_200](figure/pri_lep_pt_200.png) 
@@ -239,7 +240,7 @@ The pseudorapidity η (the angle from the beam axis) of the lepton.
 
 
 ```r
-create_plot(train, "PRI_lep_eta")
+CreatePlot(train, "PRI_lep_eta")
 ```
 
 ![plot of chunk pri_lep_eta_fig](figure/pri_lep_eta_fig.png) 
@@ -289,7 +290,7 @@ around the beam axis.
 
 
 ```r
-create_plot(train, "PRI_lep_phi")
+CreatePlot(train, "PRI_lep_phi")
 ```
 
 ![plot of chunk pri_lep_phi_fig](figure/pri_lep_phi_fig.png) 
@@ -330,7 +331,7 @@ The missing transverse energy $\overrightarrow{E}^{miss}_T$
 
 
 ```r
-create_plot(train, "PRI_met")
+CreatePlot(train, "PRI_met")
 ```
 
 ![plot of chunk pri_met](figure/pri_met.png) 
@@ -369,7 +370,7 @@ That one outlier really makes this blurry...
 
 ```r
 pm.500 <- subset(train, PRI_met < 500)
-create_plot(pm.500, "PRI_met")
+CreatePlot(pm.500, "PRI_met")
 ```
 
 ![plot of chunk pri_met_500](figure/pri_met_500.png) 
@@ -377,7 +378,7 @@ create_plot(pm.500, "PRI_met")
 
 ```r
 pm.200 <- subset(train, PRI_met < 200)
-create_plot(pm.200, "PRI_met")
+CreatePlot(pm.200, "PRI_met")
 ```
 
 ![plot of chunk pri_met_200](figure/pri_met_200.png) 
@@ -385,7 +386,7 @@ create_plot(pm.200, "PRI_met")
 
 ```r
 pm.100 <- subset(train, PRI_met < 100)
-create_plot(pm.100, "PRI_met")
+CreatePlot(pm.100, "PRI_met")
 ```
 
 ![plot of chunk pri_met_100](figure/pri_met_100.png) 
@@ -409,7 +410,7 @@ The azimuth angle φ of the missing transverse energy.
 
 
 ```r
-create_plot(train, "PRI_met_phi")
+CreatePlot(train, "PRI_met_phi")
 ```
 
 ![plot of chunk pri_met_phi](figure/pri_met_phi.png) 
@@ -450,7 +451,7 @@ summary(train[-signal, "PRI_met_phi"])
 The total transverse energy in the detector.
 
 ```r
-create_plot(train, "PRI_met_sumet")
+CreatePlot(train, "PRI_met_sumet")
 ```
 
 ![plot of chunk pri_met_sumet](figure/pri_met_sumet.png) 
@@ -488,7 +489,7 @@ summary(train[-signal, "PRI_met_sumet"])
 
 ```r
 pms.750 <- subset(train, PRI_met_sumet < 750)
-create_plot(pms.750, "PRI_met_sumet")
+CreatePlot(pms.750, "PRI_met_sumet")
 ```
 
 ![plot of chunk pri_met_sumet_750](figure/pri_met_sumet_750.png) 
@@ -496,7 +497,7 @@ create_plot(pms.750, "PRI_met_sumet")
 
 ```r
 pms.300 <- subset(train, PRI_met_sumet < 300)
-create_plot(pms.300, "PRI_met_sumet")
+CreatePlot(pms.300, "PRI_met_sumet")
 ```
 
 ![plot of chunk pri_met_sumet_300](figure/pri_met_sumet_300.png) 
@@ -504,7 +505,7 @@ create_plot(pms.300, "PRI_met_sumet")
 
 ```r
 pms.200 <- subset(train, PRI_met_sumet < 200)
-create_plot(pms.200, "PRI_met_sumet")
+CreatePlot(pms.200, "PRI_met_sumet")
 ```
 
 ![plot of chunk pri_met_sumet_200](figure/pri_met_sumet_200.png) 
@@ -532,7 +533,7 @@ largest transverse momentum (undeﬁned if PRI jet num = 0).
 
 
 ```r
-create_plot(train, "PRI_jet_leading_pt")
+CreatePlot(train, "PRI_jet_leading_pt")
 ```
 
 ![plot of chunk pri_jet_leading_pt](figure/pri_jet_leading_pt.png) 
@@ -561,7 +562,7 @@ length(which(pjlp.na == "b"))/nrow(pjlp.na)
 
 ```r
 pjlp <- subset(train, PRI_jet_leading_pt != -999)
-create_plot(pjlp, "PRI_jet_leading_pt")
+CreatePlot(pjlp, "PRI_jet_leading_pt")
 ```
 
 ![plot of chunk pri_jet_leading_pt_defined](figure/pri_jet_leading_pt_defined.png) 
@@ -603,7 +604,7 @@ The pseudorapidity η of the leading jet (undeﬁned if PRI jet num = 0).
 
 
 ```r
-create_plot(train, "PRI_jet_leading_eta")
+CreatePlot(train, "PRI_jet_leading_eta")
 ```
 
 ![plot of chunk pri_jet_leading_eta](figure/pri_jet_leading_eta.png) 
@@ -632,12 +633,7 @@ length(which(pjle.na == "b"))/nrow(pjle.na)
 
 ```r
 pjle <- subset(train, PRI_jet_leading_eta != -999)
-create_plot(pjle, "PRI_jet_leading_eta", c(-1.5, 1.5))
-```
-
-```
-## Warning: the condition has length > 1 and only the first element will be
-## used
+CreatePlot(pjle, "PRI_jet_leading_eta", c(-1.5, 1.5))
 ```
 
 ![plot of chunk pri_jet_leading_eta_defined](figure/pri_jet_leading_eta_defined.png) 
@@ -716,7 +712,7 @@ The azimuth angle φ of the leading jet (undeﬁned if PRI jet num = 0).
 
 
 ```r
-create_plot(train, "PRI_jet_leading_phi")
+CreatePlot(train, "PRI_jet_leading_phi")
 ```
 
 ![plot of chunk pri_jet_leading_phi](figure/pri_jet_leading_phi.png) 
@@ -745,7 +741,7 @@ length(which(pjlphi.na == "b"))/nrow(pjlphi.na)
 
 ```r
 pjlphi <- subset(train, PRI_jet_leading_phi != -999)
-create_plot(pjlphi, "PRI_jet_leading_phi")
+CreatePlot(pjlphi, "PRI_jet_leading_phi")
 ```
 
 ![plot of chunk pri_jet_leading_phi_defined](figure/pri_jet_leading_phi_defined.png) 
@@ -788,7 +784,7 @@ The transverse momentum $\sqrt{p^2_x+p^2_y}$ of the second leading jet.
  
 
 ```r
-create_plot(train, "PRI_jet_subleading_pt")
+CreatePlot(train, "PRI_jet_subleading_pt")
 ```
 
 ![plot of chunk pri_jet_subleading_pt](figure/pri_jet_subleading_pt.png) 
@@ -817,7 +813,7 @@ length(which(pjsp.na == "b"))/nrow(pjsp.na)
 
 ```r
 pjsp <- subset(train, PRI_jet_subleading_pt != -999)
-create_plot(pjsp, "PRI_jet_subleading_pt")
+CreatePlot(pjsp, "PRI_jet_subleading_pt")
 ```
 
 ![plot of chunk pri_jet_subleading_pt_defined](figure/pri_jet_subleading_pt_defined.png) 
@@ -858,7 +854,7 @@ summary(pjsp[-pjsp.signal, "PRI_jet_subleading_pt"])
 The azimuth angle φ of the subleading jet (undeﬁned if PRI jet num ≤ 1).
 
 ```r
-create_plot(train, "PRI_jet_subleading_phi")
+CreatePlot(train, "PRI_jet_subleading_phi")
 ```
 
 ![plot of chunk pri_jet_subleading_phi](figure/pri_jet_subleading_phi.png) 
@@ -887,7 +883,7 @@ length(which(pjsphi.na == "b"))/nrow(pjsphi.na)
 
 ```r
 pjsphi <- subset(train, PRI_jet_subleading_phi != -999)
-create_plot(pjsphi, "PRI_jet_subleading_phi")
+CreatePlot(pjsphi, "PRI_jet_subleading_phi")
 ```
 
 ![plot of chunk pri_jet_subleading_phi_defined](figure/pri_jet_subleading_phi_defined.png) 
@@ -928,7 +924,7 @@ summary(pjsphi[-pjsphi.signal, "PRI_jet_subleading_phi"])
 The scalar sum of the transverse momentum of all the jets.
 
 ```r
-create_plot(train, "PRI_jet_all_pt")
+CreatePlot(train, "PRI_jet_all_pt")
 ```
 
 ![plot of chunk pri_jet_all_pt](figure/pri_jet_all_pt.png) 
@@ -936,7 +932,7 @@ create_plot(train, "PRI_jet_all_pt")
 
 ```r
 pjap.500 <- subset(train, PRI_jet_all_pt < 500)
-create_plot(pjap.500, "PRI_jet_all_pt")
+CreatePlot(pjap.500, "PRI_jet_all_pt")
 ```
 
 ![plot of chunk pri_jet_all_pt_500](figure/pri_jet_all_pt_500.png) 
@@ -944,7 +940,7 @@ create_plot(pjap.500, "PRI_jet_all_pt")
 
 ```r
 pjap.300 <- subset(train, PRI_jet_all_pt < 300)
-create_plot(pjap.300, "PRI_jet_all_pt")
+CreatePlot(pjap.300, "PRI_jet_all_pt")
 ```
 
 ![plot of chunk pri_jet_all_pt_300](figure/pri_jet_all_pt_300.png) 
@@ -985,7 +981,7 @@ summary(train[-signal, "PRI_jet_all_pt"])
 The estimated mass of the Higgs boson candidate. May be undeﬁned.
 
 ```r
-create_plot(train, "DER_mass_MMC")
+CreatePlot(train, "DER_mass_MMC")
 ```
 
 ![plot of chunk der_mass_mmc](figure/der_mass_mmc.png) 
@@ -1014,7 +1010,7 @@ length(which(dmm.na == "b"))/nrow(dmm.na)
 
 ```r
 dmm <- subset(train, DER_mass_MMC != -999)
-create_plot(dmm, "DER_mass_MMC")
+CreatePlot(dmm, "DER_mass_MMC")
 ```
 
 ![plot of chunk der_mass_mmc_defined](figure/der_mass_mmc_defined.png) 
@@ -1022,7 +1018,7 @@ create_plot(dmm, "DER_mass_MMC")
 
 ```r
 dmm.250 <- subset(dmm, DER_mass_MMC < 250)
-create_plot(dmm.250, "DER_mass_MMC", c(75, 175))
+CreatePlot(dmm.250, "DER_mass_MMC", c(75, 175))
 ```
 
 ![plot of chunk der_mass_mmc_250](figure/der_mass_mmc_250.png) 
@@ -1047,7 +1043,7 @@ The transverse mass between the missing transverse energy and the lepton.
 
 
 ```r
-create_plot(train, "DER_mass_transverse_met_lep")
+CreatePlot(train, "DER_mass_transverse_met_lep")
 ```
 
 ![plot of chunk der_mass_transverse_met_lep](figure/der_mass_transverse_met_lep.png) 
@@ -1055,7 +1051,7 @@ create_plot(train, "DER_mass_transverse_met_lep")
 
 ```r
 dmtml.200 <- subset(train, DER_mass_transverse_met_lep < 200)
-create_plot(dmtml.200, "DER_mass_transverse_met_lep")
+CreatePlot(dmtml.200, "DER_mass_transverse_met_lep")
 ```
 
 ![plot of chunk der_mass_transverse_met_lep_200](figure/der_mass_transverse_met_lep_200.png) 
@@ -1063,8 +1059,99 @@ create_plot(dmtml.200, "DER_mass_transverse_met_lep")
 
 ```r
 dmtml.150 <- subset(train, DER_mass_transverse_met_lep < 150)
-create_plot(dmtml.150, "DER_mass_transverse_met_lep", 50)
+CreatePlot(dmtml.150, "DER_mass_transverse_met_lep", 75)
 ```
 
 ![plot of chunk der_mass_transverse_met_lep_150](figure/der_mass_transverse_met_lep_150.png) 
+
+
+```r
+dmtml.signal.75 <- subset(train[signal, ], DER_mass_transverse_met_lep < 75)
+nrow(dmtml.signal.75)/nrow(train[signal, ])
+```
+
+```
+## [1] 0.9257
+```
+
+93% of all signal observations are < 75
+
+```r
+summary(train$DER_mass_transverse_met_lep)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     0.0    19.2    46.5    49.2    73.6   690.0
+```
+
+```r
+# just the signal
+summary(train[signal, "DER_mass_transverse_met_lep"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     0.0    10.4    24.4    32.0    45.7   570.0
+```
+
+```r
+# just the background
+summary(train[-signal, "DER_mass_transverse_met_lep"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     0.0    31.4    60.8    58.2    80.2   690.0
+```
+
+**DER_mass_vis**
+
+The total invariant mass ([total energy and momentum](http://en.wikipedia.org/wiki/Invariant_mass)) of the hadronic tau and the lepton.
+
+
+```r
+CreatePlot(train, "DER_mass_vis", 150)
+```
+
+![plot of chunk der_mass_vis](figure/der_mass_vis.png) 
+
+
+```r
+dmv.150 <- subset(train, DER_mass_vis < 150)
+CreatePlot(dmv.150, "DER_mass_vis")
+```
+
+![plot of chunk der_mass_vis_150](figure/der_mass_vis_150.png) 
+
+
+```r
+summary(train$DER_mass_vis)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     6.3    59.4    73.8    81.2    92.3  1350.0
+```
+
+```r
+# just the signal
+summary(train[signal, "DER_mass_vis"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     7.5    67.4    79.4    80.4    91.9   790.0
+```
+
+```r
+# just the background
+summary(train[-signal, "DER_mass_vis"])
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     6.3    55.5    69.7    81.6    92.7  1350.0
+```
+
 
