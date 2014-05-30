@@ -57,10 +57,14 @@ require(ggplot2)
 
 
 ```r
-create_plot <- function(data, v) {
+create_plot <- function(data, v, yintercept = c()) {
     p <- ggplot(data, aes(x = EventId, y = data[, v], color = Label), environment = environment())
     l <- p + labs(y = v)
-    print(l + geom_point())
+    if (length(yintercept) == 0) {
+        print(l + geom_point())
+    } else {
+        print(l + geom_point() + geom_hline(yintercept = yintercept))
+    }
 }
 ```
 
@@ -628,10 +632,12 @@ length(which(pjle.na == "b"))/nrow(pjle.na)
 
 ```r
 pjle <- subset(train, PRI_jet_leading_eta != -999)
-v <- "PRI_jet_leading_eta"
-p <- ggplot(pjle, aes(x = EventId, y = pjle[, v], color = Label), environment = environment())
-l <- p + labs(y = v)
-print(l + geom_point() + geom_hline(yintercept = c(-1.5, 1.5)))
+create_plot(pjle, "PRI_jet_leading_eta", c(-1.5, 1.5))
+```
+
+```
+## Warning: the condition has length > 1 and only the first element will be
+## used
 ```
 
 ![plot of chunk pri_jet_leading_eta_defined](figure/pri_jet_leading_eta_defined.png) 
@@ -1016,10 +1022,7 @@ create_plot(dmm, "DER_mass_MMC")
 
 ```r
 dmm.250 <- subset(dmm, DER_mass_MMC < 250)
-v <- "DER_mass_MMC"
-p <- ggplot(dmm.250, aes(x = EventId, y = dmm.250[, v], color = Label), environment = environment())
-l <- p + labs(y = v)
-print(l + geom_point() + geom_hline(yintercept = c(75, 175)))
+create_plot(dmm.250, "DER_mass_MMC", c(75, 175))
 ```
 
 ![plot of chunk der_mass_mmc_250](figure/der_mass_mmc_250.png) 
@@ -1037,4 +1040,31 @@ nrow(dmm.signal.inrange)/nrow(dmm.signal)
 ```
 
 97% of defined signal observations lie in range 75 to 175
+
+**DER_mass_transverse_met_lep**
+
+The transverse mass between the missing transverse energy and the lepton.
+
+
+```r
+create_plot(train, "DER_mass_transverse_met_lep")
+```
+
+![plot of chunk der_mass_transverse_met_lep](figure/der_mass_transverse_met_lep.png) 
+
+
+```r
+dmtml.200 <- subset(train, DER_mass_transverse_met_lep < 200)
+create_plot(dmtml.200, "DER_mass_transverse_met_lep")
+```
+
+![plot of chunk der_mass_transverse_met_lep_200](figure/der_mass_transverse_met_lep_200.png) 
+
+
+```r
+dmtml.150 <- subset(train, DER_mass_transverse_met_lep < 150)
+create_plot(dmtml.150, "DER_mass_transverse_met_lep", 50)
+```
+
+![plot of chunk der_mass_transverse_met_lep_150](figure/der_mass_transverse_met_lep_150.png) 
 
